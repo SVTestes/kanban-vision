@@ -31,7 +31,7 @@ RUN apk -U upgrade \
   && apk add bash python3 --no-cache \
   && npm install npm --global
 
-USER node
+# USER node
 WORKDIR /app
 
 COPY --chown=node:node LICENSE.md .

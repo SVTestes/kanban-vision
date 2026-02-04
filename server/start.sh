@@ -2,6 +2,9 @@
 
 set -eu
 
+mkdir -p /app/data
+chmod 777 /app/data
+
 # Load secrets from files if corresponding *__FILE environment variables are set.
 # Only the first line of each file is read (stripping carriage returns and newlines).
 

@@ -13,7 +13,7 @@ Como você clonou o repositório oficial, você não tem permissão para enviar 
     git remote remove origin
 
     # Adicione o seu novo repositório (substitua USUARIO pelo seu usuário do GitHub)
-    git remote add origin https://github.com/USUARIO/meu-planka.git
+    git remote add origin https://github.com/SVTestes/kanban-vision.git
 
     # Adicione os arquivos e faça o primeiro commit
     git add .
@@ -93,5 +93,13 @@ Você perguntou: *"adicionar uma função nova por aqui e atualizar na railway �
 ## Dicas Importantes
 
 *   **Persistência de Dados**: Como usamos o serviço de banco do Railway, você pode fazer deploys à vontade que seus cartões e usuários não somem.
-*   **Imagens**: Se você fizer upload de anexos/imagens nos cartões, por padrão eles ficam dentro do container e **serão perdidos** a cada novo deploy.
-    *   Para produção, o ideal é configurar o **S3** (AWS S3, MinIO, ou similares) nas variáveis de ambiente (`S3_ENDPOINT`, `S3_BUCKET`, etc) para salvar anexos fora do container.
+*   **Imagens (S3/Bucket)**:
+    *   Por padrão, imagens salvas no disco local do container são perdidas a cada deploy (a menos que use um Volume).
+    *   **Recomendado:** Crie um **Bucket** no Railway.
+    *   Vá nas variáveis do Planka e configure:
+        *   `S3_ENDPOINT`: Endpoint do bucket (ex: `s3.us-west-1.amazonaws.com` ou o host do MinIO privado).
+        *   `S3_BUCKET`: Nome do bucket.
+        *   `S3_REGION`: Região (us-east-1, etc).
+        *   `S3_ACCESS_KEY_ID` e `S3_SECRET_ACCESS_KEY`: Suas credenciais.
+        *   `S3_FORCE_PATH_STYLE`: `true`.
+    *   *Dica: Ao usar o Bucket, você pode excluir o Volume de arquivos (`/app/data`) se não tiver arquivos antigos nele.*
