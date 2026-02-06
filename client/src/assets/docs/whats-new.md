@@ -1,84 +1,22 @@
-## [2.4.0] - 2025-03-22
+A Unique Cafés nasceu em São Lourenço (MG), no coração da Serra da Mantiqueira, com o propósito de levar cafés especiais de altíssima qualidade, produzidos pela família na Fazenda Sertão (fundada em 1912), direto para a xícara. 
 
-### Added
+Fundada pela quarta geração, a marca une tradição centenária com a paixão por cafés raros, educando o consumidor e oferecendo experiências do grão à xícara.
 
-* Lorem ipsum dolor sit amet consectetur adipiscing elit.
-* Sed do eiusmod tempor incididunt ut labore et dolore magna.
-* Ut enim ad minim veniam quis nostrud exercitation ullamco.
+Assista a este vídeo para conhecer a história da Unique Cafés contada pelos fundadores:
+https://www.youtube.com/watch?v=Kf3X1ccwWrE\&t=37
 
-### Changed
 
-* Duis aute irure dolor in reprehenderit in voluptate velit esse.
-* Excepteur sint occaecat cupidatat non proident sunt in culpa.
 
-### Fixed
+Unique Cafés
+Raízes e Tradição: A história está profundamente ligada à Fazenda Sertão, com lavouras de mais de 100 anos, como a "Bastião Nunes", e tradição na produção de cafés de altitude desde 1912.
 
-* Nulla pariatur consectetur adipiscing elit sed do eiusmod.
-* Tempor incididunt ut labore et dolore magna aliqua enim.
+O Sonho da Quarta Geração: O objetivo da Unique foi superar a comercialização de cafés sem identidade, "garimpando" e oferecendo cafés raros e especiais, transformando o fruto em iguarias.
 
----
+Recorde Mundial: Em 2005, a Fazenda Sertão, base da produção Unique, alcançou a maior pontuação já registrada no concurso Cup of Excellence (95,85 pontos).
 
-## [2.3.2] - 2025-02-18
 
-### Fixed
 
-* Minim veniam quis nostrud exercitation ullamco laboris nisi.
-* Aliquip ex ea commodo consequat duis aute irure dolor.
+Experiência Unique: A marca, com mais de 18 anos de história, oferece torrefação artesanal própria, laboratório de baristas e um espaço de terceira onda, onde os clientes podem acompanhar o processo de produção.
 
----
+Inovação e Sustentabilidade: Com um forte foco em qualidade, a Unique evoluiu de métodos convencionais para técnicas sustentáveis de café especial, como o cereja descascado.
 
-## [2.3.0] - 2025-01-29
-
-### Added
-
-* Reprehenderit in voluptate velit esse cillum dolore eu fugiat.
-* Excepteur sint occaecat cupidatat non proident culpa qui officia.
-
-### Changed
-
-* Deserunt mollit anim id est laborum sed ut perspiciatis.
-
-### Deprecated
-
-* Unde omnis iste natus error sit voluptatem accusantium doloremque.
-
----
-
-## [2.2.0] - 2024-12-14
-
-### Added
-
-* Totam rem aperiam eaque ipsa quae ab illo inventore veritatis.
-* Quasi architecto beatae vitae dicta sunt explicabo nemo.
-
-### Changed
-
-* Enim ipsam voluptatem quia voluptas sit aspernatur aut odit.
-* Consequuntur magni dolores eos qui ratione voluptatem sequi.
-
-### Fixed
-
-* Neque porro quisquam est qui dolorem ipsum quia dolor.
-
----
-
-## [2.1.0] - 2024-10-05
-
-### Added
-
-* Adipisci velit sed quia non numquam eius modi tempora incidunt.
-* Ut labore et dolore magnam aliquam quaerat voluptatem neque.
-
----
-
-## [2.0.0] - 2024-08-20
-
-### Added
-
-* Porro quisquam est qui dolorem ipsum quia dolor sit amet.
-* Consectetur adipisci velit sed quia non numquam eius modi.
-* Tempora incidunt ut labore et dolore magnam aliquam quaerat.
-
-### Removed
-
-* Voluptatem neque porro quisquam est qui dolorem ipsum quia.
