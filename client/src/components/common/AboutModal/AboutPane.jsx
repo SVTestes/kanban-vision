@@ -37,7 +37,7 @@ const AboutPane = React.memo(() => {
 
   return (
     <Tab.Pane attached={false} className={styles.wrapper}>
-      <a href="https://github.com/plankanban/planka" target="_blank" rel="noreferrer">
+      <a href="https://uniquecafes.com.br/" target="_blank" rel="noreferrer">
         <Image centered src={aboutLogo} size="large" />
       </a>
       <div className={styles.version}>Community v{version}</div>

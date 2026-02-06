@@ -21,7 +21,7 @@ export default {
   translation: {
     common: {
       aboutApp_title: 'Sobre o aplicativo',
-      aboutPlanka_title: 'Sobre o PLANKA',
+      aboutPlanka_title: 'Sobre a Unique',
       accessToken: 'Token de acesso',
       account: 'Conta',
       actions: 'Ações',
