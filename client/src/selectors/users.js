@@ -300,6 +300,28 @@ export const selectNotificationIdsForCurrentUser = createSelector(
   },
 );
 
+export const selectAllNotificationIdsForCurrentUser = createSelector(
+  orm,
+  (state) => selectCurrentUserId(state),
+  ({ User }, id) => {
+    if (!id) {
+      return id;
+    }
+
+    const userModel = User.withId(id);
+
+    if (!userModel) {
+      return userModel;
+    }
+
+    // Usually IDs are strings that can be sorted alphabetically backwards for descending order if they're snowflakes.
+    return userModel.notifications
+      .toRefArray()
+      .sort((a, b) => b.id.localeCompare(a.id))
+      .map((notification) => notification.id);
+  },
+);
+
 export const selectNotificationServiceIdsForCurrentUser = createSelector(
   orm,
   (state) => selectCurrentUserId(state),
@@ -358,6 +380,7 @@ export default {
   selectProjectsToListsWithEditorRightsForCurrentUser,
   selectBoardIdsForCurrentUser,
   selectNotificationIdsForCurrentUser,
+  selectAllNotificationIdsForCurrentUser,
   selectNotificationServiceIdsForCurrentUser,
   selectIsFavoritesActiveForCurrentUser,
 };

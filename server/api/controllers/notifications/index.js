@@ -47,7 +47,7 @@ module.exports = {
   async fn() {
     const { currentUser } = this.req;
 
-    const notifications = await Notification.qm.getUnreadByUserId(currentUser.id);
+    const notifications = await Notification.qm.getByUserId(currentUser.id);
 
     const userIds = sails.helpers.utils.mapRecords(notifications, 'creatorUserId', true, true);
     const users = await User.qm.getByIds(userIds);

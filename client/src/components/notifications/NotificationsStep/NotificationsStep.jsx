@@ -3,11 +3,11 @@
  * Licensed under the Fair Use License: https://github.com/plankanban/planka/blob/master/LICENSE.md
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'semantic-ui-react';
+import { Checkbox } from 'semantic-ui-react';
 import { Popup } from '../../../lib/custom-ui';
 
 import selectors from '../../../selectors';
@@ -17,7 +17,12 @@ import Item from './Item';
 import styles from './NotificationsStep.module.scss';
 
 const NotificationsStep = React.memo(({ onClose }) => {
-  const notificationIds = useSelector(selectors.selectNotificationIdsForCurrentUser);
+  const [showUnreadOnly, setShowUnreadOnly] = useState(false);
+
+  const allNotificationIds = useSelector(selectors.selectAllNotificationIdsForCurrentUser) || [];
+  const unreadNotificationIds = useSelector(selectors.selectNotificationIdsForCurrentUser) || [];
+
+  const displayIds = showUnreadOnly ? unreadNotificationIds : allNotificationIds;
 
   const dispatch = useDispatch();
   const [t] = useTranslation();
@@ -26,30 +31,51 @@ const NotificationsStep = React.memo(({ onClose }) => {
     dispatch(entryActions.deleteAllNotifications());
   }, [dispatch]);
 
+  const handleToggleUnread = useCallback(() => {
+    setShowUnreadOnly((prev) => !prev);
+  }, []);
+
   return (
     <>
       <Popup.Header>
-        {t('common.notifications', {
-          context: 'title',
-        })}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>
+            {t('common.notifications', {
+              context: 'title',
+            })}
+          </span>
+          {unreadNotificationIds.length > 0 && (
+            <span
+              className={styles.markAllRead}
+              onClick={handleDeleteAllClick}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleDeleteAllClick();
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              {t('action.dismissAll', 'Mark all as read')}
+            </span>
+          )}
+        </div>
       </Popup.Header>
       <Popup.Content>
-        {notificationIds.length > 0 ? (
-          <>
-            <div className={styles.items}>
-              {notificationIds.map((notificationId) => (
-                <Item key={notificationId} id={notificationId} onClose={onClose} />
-              ))}
-            </div>
-            <Button
-              fluid
-              content={t('action.dismissAll')}
-              className={styles.deleteAllButton}
-              onClick={handleDeleteAllClick}
-            />
-          </>
+        <div className={styles.filterToggle}>
+          <Checkbox
+            toggle
+            label={t('action.showOnlyUnread', 'Mostrar apenas itens não lidos')}
+            checked={showUnreadOnly}
+            onChange={handleToggleUnread}
+          />
+        </div>
+        {displayIds.length > 0 ? (
+          <div className={styles.items}>
+            {displayIds.map((notificationId) => (
+              <Item key={notificationId} id={notificationId} onClose={onClose} />
+            ))}
+          </div>
         ) : (
-          t('common.noUnreadNotifications')
+          <div className={styles.emptyMessage}>{t('common.noUnreadNotifications')}</div>
         )}
       </Popup.Content>
     </>

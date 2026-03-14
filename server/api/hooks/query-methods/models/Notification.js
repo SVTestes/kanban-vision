@@ -77,6 +77,11 @@ const getUnreadByUserId = (userId) =>
     isRead: false,
   });
 
+const getByUserId = (userId) =>
+  defaultFind({
+    userId,
+  }).limit(LIMIT);
+
 const getOneById = (id, { userId } = {}) => {
   const criteria = {
     id,
@@ -101,6 +106,7 @@ module.exports = {
   createOne,
   getByIds,
   getUnreadByUserId,
+  getByUserId,
   getOneById,
   update,
   updateOne,

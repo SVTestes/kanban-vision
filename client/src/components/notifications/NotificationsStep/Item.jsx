@@ -1,15 +1,10 @@
-/*!
- * Copyright (c) 2024 PLANKA Software GmbH
- * Licensed under the Fair Use License: https://github.com/plankanban/planka/blob/master/LICENSE.md
- */
-
+// ... existing imports ...
 import truncate from 'lodash/truncate';
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 
 import selectors from '../../../selectors';
 import entryActions from '../../../entry-actions';
@@ -27,6 +22,10 @@ const Item = React.memo(({ id, onClose }) => {
   const selectCreatorUserById = useMemo(() => selectors.makeSelectUserById(), []);
   const selectCardById = useMemo(() => selectors.makeSelectCardById(), []);
 
+  // Need to get board and list to display the location
+  const selectBoardById = useMemo(() => selectors.makeSelectBoardById(), []);
+  const selectListById = useMemo(() => selectors.makeSelectListById(), []);
+
   const notification = useSelector((state) => selectNotificationById(state, id));
 
   const creatorUser = useSelector((state) =>
@@ -35,12 +34,20 @@ const Item = React.memo(({ id, onClose }) => {
 
   const card = useSelector((state) => selectCardById(state, notification.cardId));
 
+  const listId = card ? card.listId : notification.data?.list?.id;
+  const boardId = card ? card.boardId : notification.data?.board?.id;
+
+  const list = useSelector((state) => selectListById(state, listId));
+  const board = useSelector((state) => selectBoardById(state, boardId));
+
   const dispatch = useDispatch();
   const [t] = useTranslation();
 
-  const handleDeleteClick = useCallback(() => {
-    dispatch(entryActions.deleteNotification(id));
-  }, [id, dispatch]);
+  const handleReadClick = useCallback(() => {
+    if (!notification.isRead) {
+      dispatch(entryActions.deleteNotification(id));
+    }
+  }, [id, notification.isRead, dispatch]);
 
   const creatorUserName = isUserStatic(creatorUser)
     ? t(`common.${creatorUser.name}`, {
@@ -48,121 +55,109 @@ const Item = React.memo(({ id, onClose }) => {
       })
     : creatorUser.name;
 
-  const cardName = card ? card.name : notification.data.card.name;
+  const cardName = card ? card.name : notification.data?.card?.name || '';
+  const locationText = board && list ? `${board.name} > ${list.name}` : '';
 
-  let contentNode;
+  let actionTextNode;
   switch (notification.type) {
     case NotificationTypes.MOVE_CARD: {
       const { fromList, toList } = notification.data;
-
       const fromListName = fromList.name || t(`common.${fromList.type}`);
       const toListName = toList.name || t(`common.${toList.type}`);
 
-      contentNode = (
-        <Trans
-          i18nKey="common.userMovedCardFromListToList"
-          values={{
-            user: creatorUserName,
-            card: cardName,
-            fromList: fromListName,
-            toList: toListName,
-          }}
-        >
-          <span className={styles.author}>{creatorUserName}</span>
+      actionTextNode = (
+        <>
           {' moved '}
-          <Link to={Paths.CARDS.replace(':id', notification.cardId)} onClick={onClose}>
+          <Link
+            to={Paths.CARDS.replace(':id', notification.cardId)}
+            onClick={onClose}
+            className={styles.cardLink}
+          >
             {cardName}
           </Link>
-          {' from '}
-          {fromListName}
-          {' to '}
-          {toListName}
-        </Trans>
+          {` from ${fromListName} to ${toListName}`}
+        </>
       );
-
       break;
     }
     case NotificationTypes.COMMENT_CARD: {
       const commentText = truncate(mentionMarkupToText(notification.data.text));
-
-      contentNode = (
-        <Trans
-          i18nKey="common.userLeftNewCommentToCard"
-          values={{
-            user: creatorUserName,
-            comment: commentText,
-            card: cardName,
-          }}
-        >
-          <span className={styles.author}>{creatorUserName}</span>
-          {` left a new comment «${commentText}» to `}
-          <Link to={Paths.CARDS.replace(':id', notification.cardId)} onClick={onClose}>
+      actionTextNode = (
+        <>
+          {` left a new comment  `}
+          <Link
+            to={Paths.CARDS.replace(':id', notification.cardId)}
+            onClick={onClose}
+            className={styles.cardLink}
+          >
             {cardName}
           </Link>
-        </Trans>
+          <div className={styles.commentText}>&quot;{commentText}&quot;</div>
+        </>
       );
-
       break;
     }
     case NotificationTypes.ADD_MEMBER_TO_CARD:
-      contentNode = (
-        <Trans
-          i18nKey="common.userAddedYouToCard"
-          values={{
-            user: creatorUserName,
-            card: cardName,
-          }}
-        >
-          <span className={styles.author}>{creatorUserName}</span>
+      actionTextNode = (
+        <>
           {` added you to `}
-          <Link to={Paths.CARDS.replace(':id', notification.cardId)} onClick={onClose}>
+          <Link
+            to={Paths.CARDS.replace(':id', notification.cardId)}
+            onClick={onClose}
+            className={styles.cardLink}
+          >
             {cardName}
           </Link>
-        </Trans>
+        </>
       );
-
       break;
     case NotificationTypes.MENTION_IN_COMMENT: {
       const commentText = truncate(mentionMarkupToText(notification.data.text));
-
-      contentNode = (
-        <Trans
-          i18nKey="common.userMentionedYouInCommentOnCard"
-          values={{
-            user: creatorUserName,
-            comment: commentText,
-            card: cardName,
-          }}
-        >
-          <span className={styles.author}>{creatorUserName}</span>
-          {` mentioned you in «${commentText}» on `}
-          <Link to={Paths.CARDS.replace(':id', notification.cardId)} onClick={onClose}>
+      actionTextNode = (
+        <>
+          {` mentioned you in a comment on `}
+          <Link
+            to={Paths.CARDS.replace(':id', notification.cardId)}
+            onClick={onClose}
+            className={styles.cardLink}
+          >
             {cardName}
           </Link>
-        </Trans>
+          <div className={styles.commentText}>&quot;{commentText}&quot;</div>
+        </>
       );
-
       break;
     }
     default:
-      contentNode = null;
+      actionTextNode = null;
   }
 
   return (
-    <div className={styles.wrapper}>
-      <UserAvatar id={notification.creatorUserId} size="large" />
-      <span className={styles.content}>
-        <div>{contentNode}</div>
-        <span className={styles.date}>
-          <TimeAgo date={notification.createdAt} />
-        </span>
-      </span>
-      <Button
-        type="button"
-        icon="trash alternate outline"
-        className={styles.button}
-        onClick={handleDeleteClick}
-      />
+    <div
+      className={`${styles.wrapper} ${!notification.isRead ? styles.unread : ''}`}
+      onClick={handleReadClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') handleReadClick();
+      }}
+      role="button"
+      tabIndex={0}
+    >
+      <div className={styles.avatarContainer}>
+        <UserAvatar id={notification.creatorUserId} size="large" />
+      </div>
+      <div className={styles.content}>
+        <div className={styles.textBody}>
+          <span className={styles.author}>{creatorUserName}</span>
+          {actionTextNode}
+        </div>
+
+        {locationText && <div className={styles.location}>{locationText}</div>}
+
+        <div className={styles.date}>
+          <TimeAgo date={new Date(notification.createdAt)} />
+        </div>
+      </div>
+      {!notification.isRead && <div className={styles.unreadIndicator} />}
     </div>
   );
 });

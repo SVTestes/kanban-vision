@@ -101,9 +101,12 @@ export function* fetchCore() {
     if (notificationIds.length > 0) {
       yield call(request, api.readCardNotifications, card.id);
 
-      notifications = notifications.filter(
-        (notification) => !notificationIds.includes(notification.id),
-      );
+      notifications = notifications.map((notification) => {
+        if (notificationIds.includes(notification.id)) {
+          return { ...notification, isRead: true };
+        }
+        return notification;
+      });
     }
   }
 

@@ -4,25 +4,24 @@
  */
 
 :global(#app) {
-  .deleteAllButton {
-    background: transparent;
-    box-shadow: none;
-    color: #6b808c;
-    font-weight: normal;
-    margin-top: 8px;
-    padding: 6px 11px;
-    text-decoration: underline;
-    transition: none;
+  .markAllRead {
+    color: #0079bf;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
 
     &:hover {
-      background: rgba(9, 30, 66, 0.08);
-      color: #092d42;
+      text-decoration: underline;
     }
   }
 
+  .filterToggle {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ebecf0;
+  }
+
   .items {
-    margin: 0 -12px;
-    max-height: 60vh;
+    max-height: 50vh;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -42,5 +41,12 @@
     &::-webkit-scrollbar-thumb {
       border-radius: 3px;
     }
+  }
+
+  .emptyMessage {
+    padding: 24px;
+    text-align: center;
+    color: #5e6c84;
+    font-size: 14px;
   }
 }

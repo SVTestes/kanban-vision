@@ -259,6 +259,7 @@ export default {
       organization: 'Organization',
       others: 'Others',
       passwordIsSet: 'Password is set',
+      passwordIsTooWeak: 'Password is too weak, please choose a stronger password',
       phone: 'Phone',
       plankaUsesAppriseToSendNotificationsToOver100PopularServices:
         'PLANKA uses <1><0>Apprise</0></1> to send notifications to over 100 popular services.',

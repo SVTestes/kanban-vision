@@ -4,7 +4,7 @@
  */
 
 import isEmail from 'validator/lib/isEmail';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
@@ -75,6 +75,8 @@ const AddStep = React.memo(({ onClose }) => {
   const [nameFieldRef, handleNameFieldRef] = useNestedRef('inputRef');
   const [usernameFieldRef, handleUsernameFieldRef] = useNestedRef('inputRef');
 
+  const [passwordError, setPasswordError] = useState(null);
+
   const handleSubmit = useCallback(() => {
     const cleanData = {
       ...data,
@@ -89,9 +91,12 @@ const AddStep = React.memo(({ onClose }) => {
     }
 
     if (!cleanData.password || !isPassword(cleanData.password)) {
+      setPasswordError(t('common.passwordIsTooWeak'));
       passwordFieldRef.current.focus();
       return;
     }
+
+    setPasswordError(null);
 
     if (!cleanData.name) {
       nameFieldRef.current.select();
@@ -104,7 +109,7 @@ const AddStep = React.memo(({ onClose }) => {
     }
 
     dispatch(entryActions.createUser(cleanData));
-  }, [dispatch, data, emailFieldRef, passwordFieldRef, nameFieldRef, usernameFieldRef]);
+  }, [dispatch, data, emailFieldRef, passwordFieldRef, nameFieldRef, usernameFieldRef, t]);
 
   const handleRoleSelect = useCallback(
     (role) => {
@@ -196,8 +201,20 @@ const AddStep = React.memo(({ onClose }) => {
             maxLength={256}
             readOnly={isSubmitting}
             className={styles.field}
-            onChange={handleFieldChange}
+            onChange={(...args) => {
+              setPasswordError(null);
+              handleFieldChange(...args);
+            }}
           />
+          {passwordError && (
+            <Message
+              warning
+              visible
+              size="tiny"
+              content={passwordError}
+              className={styles.fieldMessage}
+            />
+          )}
           <div className={styles.text}>{t('common.name')}</div>
           <Input
             fluid

@@ -75,7 +75,7 @@ export default class extends BaseModel {
 
         break;
       case ActionTypes.ALL_NOTIFICATIONS_DELETE:
-        Notification.all().delete();
+        Notification.all().update({ isRead: true });
 
         break;
       case ActionTypes.ALL_NOTIFICATIONS_DELETE__SUCCESS:
@@ -83,7 +83,7 @@ export default class extends BaseModel {
           const notificationModel = Notification.withId(notification.id);
 
           if (notificationModel) {
-            notificationModel.delete();
+            notificationModel.update({ isRead: true });
           }
         });
 
@@ -93,15 +93,19 @@ export default class extends BaseModel {
 
         break;
       case ActionTypes.NOTIFICATION_DELETE:
-        Notification.withId(payload.id).delete();
-
+        {
+          const notificationModel = Notification.withId(payload.id);
+          if (notificationModel) {
+            notificationModel.update({ isRead: true });
+          }
+        }
         break;
       case ActionTypes.NOTIFICATION_DELETE__SUCCESS:
       case ActionTypes.NOTIFICATION_DELETE_HANDLE: {
         const notificationModel = Notification.withId(payload.notification.id);
 
         if (notificationModel) {
-          notificationModel.delete();
+          notificationModel.update({ isRead: true });
         }
 
         break;
