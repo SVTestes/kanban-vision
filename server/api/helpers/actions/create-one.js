@@ -12,6 +12,8 @@ const buildTitle = (action, t) => {
       return t('Card Created');
     case Action.Types.MOVE_CARD:
       return t('Card Moved');
+    case Action.Types.DUE_DATE:
+      return t('Due Date Expired');
     default:
       return null;
   }
@@ -74,6 +76,20 @@ const buildBodyByFormat = (board, card, action, actorUser, t) => {
         ),
       };
     }
+    case Action.Types.DUE_DATE:
+      return {
+        text: t('Card %s is due on %s', card.name, board.name),
+        markdown: t(
+          'Card %s is due on %s',
+          markdownCardLink,
+          escapeMarkdown(board.name),
+        ),
+        html: t(
+          'Card %s is due on %s',
+          htmlCardLink,
+          escapeHtml(board.name),
+        ),
+      };
     default:
       return null;
   }
@@ -121,7 +137,7 @@ module.exports = {
       ...values,
       boardId: values.card.boardId,
       cardId: values.card.id,
-      userId: values.user.id,
+      userId: values.user ? values.user.id : null,
     });
 
     sails.sockets.broadcast(
@@ -133,24 +149,26 @@ module.exports = {
       inputs.request,
     );
 
-    sails.helpers.utils.sendWebhooks.with({
-      webhooks: inputs.webhooks,
-      event: Webhook.Events.ACTION_CREATE,
-      buildData: () => ({
-        item: action,
-        included: {
-          projects: [inputs.project],
-          boards: [inputs.board],
-          lists: [inputs.list],
-          cards: [values.card],
-        },
-      }),
-      user: values.user,
-    });
+    if (values.user) {
+      sails.helpers.utils.sendWebhooks.with({
+        webhooks: inputs.webhooks,
+        event: Webhook.Events.ACTION_CREATE,
+        buildData: () => ({
+          item: action,
+          included: {
+            projects: [inputs.project],
+            boards: [inputs.board],
+            lists: [inputs.list],
+            cards: [values.card],
+          },
+        }),
+        user: values.user,
+      });
+    }
 
     if (Action.INTERNAL_NOTIFIABLE_TYPES.includes(action.type)) {
       if (Action.PERSONAL_NOTIFIABLE_TYPES.includes(action.type)) {
-        if (values.user.id !== action.data.user.id) {
+        if (!values.user || values.user.id !== action.data.user.id) {
           await sails.helpers.notifications.createOne.with({
             values: {
               action,
@@ -177,7 +195,19 @@ module.exports = {
           action.userId,
         );
 
-        const notifiableUserIds = _.union(cardSubscriptionUserIds, boardSubscriptionUserIds);
+        let notifiableUserIds = _.union(cardSubscriptionUserIds, boardSubscriptionUserIds);
+
+        if (action.type === Action.Types.DUE_DATE) {
+          const cardMemberships = await CardMembership.find({ cardId: action.cardId });
+          const memberUserIds = cardMemberships.map((cm) => cm.userId);
+          notifiableUserIds = _.union(notifiableUserIds, memberUserIds, [
+            values.card.creatorUserId,
+          ]);
+          // Filter out null/undefined userIds to prevent Notification.createEach
+          // from failing validation (userId is required), which would rollback
+          // the entire transaction and prevent ALL notifications from being created.
+          notifiableUserIds = notifiableUserIds.filter((id) => id != null);
+        }
 
         await sails.helpers.notifications.createMany.with({
           arrayOfValues: notifiableUserIds.map((userId) => ({
@@ -185,7 +215,7 @@ module.exports = {
             action,
             type: action.type,
             data: action.data,
-            creatorUser: values.user,
+            creatorUser: values.user || null,
             card: values.card,
           })),
           project: inputs.project,
@@ -209,7 +239,7 @@ module.exports = {
           inputs.board,
           values.card,
           action,
-          values.user,
+          values.user || null,
           sails.helpers.utils.makeTranslator(),
         );
       }

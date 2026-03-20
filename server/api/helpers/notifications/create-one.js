@@ -18,6 +18,8 @@ const buildTitle = (notification, t) => {
       return t('You Were Added to Card');
     case Notification.Types.MENTION_IN_COMMENT:
       return t('You Were Mentioned in Comment');
+    case Notification.Types.DUE_DATE:
+      return t('Due Date Expired');
     default:
       return null;
   }
@@ -123,6 +125,20 @@ const buildBodyByFormat = (board, card, notification, actorUser, t) => {
         )}:\n\n<i>${escapeHtml(commentText)}</i>`,
       };
     }
+    case Notification.Types.DUE_DATE:
+      return {
+        text: t('Card %s is due on %s', card.name, board.name),
+        markdown: t(
+          'Card %s is due on %s',
+          markdownCardLink,
+          escapeMarkdown(board.name),
+        ),
+        html: t(
+          'Card %s is due on %s',
+          htmlCardLink,
+          escapeHtml(board.name),
+        ),
+      };
     default:
       return null;
   }
@@ -193,6 +209,14 @@ const buildAndSendEmail = async (
       )}</p><p>${escapeHtml(mentionMarkupToText(notification.data.text))}</p>`;
 
       break;
+    case Notification.Types.DUE_DATE:
+      html = `<p>${t(
+        'Card %s is due on %s',
+        cardLink,
+        boardLink,
+      )}</p>`;
+
+      break;
     default:
       return;
   }
@@ -244,7 +268,7 @@ module.exports = {
 
     const notification = await Notification.qm.createOne({
       ...values,
-      creatorUserId: values.creatorUser.id,
+      creatorUserId: values.creatorUser ? values.creatorUser.id : null,
       boardId: values.card.boardId,
       cardId: values.card.id,
     });
@@ -252,30 +276,32 @@ module.exports = {
     sails.sockets.broadcast(`user:${notification.userId}`, 'notificationCreate', {
       item: notification,
       included: {
-        users: [sails.helpers.users.presentOne(values.creatorUser, {})], // FIXME: hack
+        users: values.creatorUser ? [sails.helpers.users.presentOne(values.creatorUser, {})] : [], // FIXME: hack
       },
     });
 
-    sails.helpers.utils.sendWebhooks.with({
-      webhooks: inputs.webhooks,
-      event: Webhook.Events.NOTIFICATION_CREATE,
-      buildData: () => ({
-        item: notification,
-        included: {
-          projects: [inputs.project],
-          boards: [inputs.board],
-          lists: [inputs.list],
-          cards: [values.card],
-          ...(values.comment && {
-            comments: [values.comment],
-          }),
-          ...(values.action && {
-            actions: [values.action],
-          }),
-        },
-      }),
-      user: values.creatorUser,
-    });
+    if (values.creatorUser) {
+      sails.helpers.utils.sendWebhooks.with({
+        webhooks: inputs.webhooks,
+        event: Webhook.Events.NOTIFICATION_CREATE,
+        buildData: () => ({
+          item: notification,
+          included: {
+            projects: [inputs.project],
+            boards: [inputs.board],
+            lists: [inputs.list],
+            cards: [values.card],
+            ...(values.comment && {
+              comments: [values.comment],
+            }),
+            ...(values.action && {
+              actions: [values.action],
+            }),
+          },
+        }),
+        user: values.creatorUser,
+      });
+    }
 
     const notifiableUser = await User.qm.getOneById(notification.userId, {
       withDeactivated: false,
