@@ -298,9 +298,13 @@ const Content = React.memo(() => {
             <div className={styles.poweredBy}>
               <p className={styles.poweredByText}>
                 <Trans i18nKey="common.poweredByPlanka">
-                  {'Powered by '}
-                  <a href="https://github.com/plankanban/planka" target="_blank" rel="noreferrer">
-                    PLANKA
+                  {'Desenvolvido por '}
+                  <a
+                    href="https://trello.com/b/e677ku66/special-vision"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    SV digital Ltda
                   </a>
                 </Trans>
               </p>
