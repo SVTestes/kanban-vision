@@ -14,6 +14,8 @@ const buildTitle = (action, t) => {
       return t('Card Moved');
     case Action.Types.DUE_DATE:
       return t('Due Date Expired');
+    case Action.Types.TASK_DUE_DATE:
+      return t('Task Due Date Expired');
     default:
       return null;
   }
@@ -82,6 +84,18 @@ const buildBodyByFormat = (board, card, action, actorUser, t) => {
         markdown: t('Card %s is due on %s', markdownCardLink, escapeMarkdown(board.name)),
         html: t('Card %s is due on %s', htmlCardLink, escapeHtml(board.name)),
       };
+    case Action.Types.TASK_DUE_DATE: {
+      const taskName = (action.data && action.data.task && action.data.task.name) || '';
+      return {
+        text: t('Task %s is due on %s', taskName, board.name),
+        markdown: t(
+          'Task %s is due on %s',
+          `**${escapeMarkdown(taskName)}**`,
+          escapeMarkdown(board.name),
+        ),
+        html: t('Task %s is due on %s', `<b>${escapeHtml(taskName)}</b>`, escapeHtml(board.name)),
+      };
+    }
     default:
       return null;
   }
@@ -189,12 +203,20 @@ module.exports = {
 
         let notifiableUserIds = _.union(cardSubscriptionUserIds, boardSubscriptionUserIds);
 
-        if (action.type === Action.Types.DUE_DATE) {
+        if (action.type === Action.Types.DUE_DATE || action.type === Action.Types.TASK_DUE_DATE) {
           const cardMemberships = await CardMembership.find({ cardId: action.cardId });
           const memberUserIds = cardMemberships.map((cm) => cm.userId);
-          notifiableUserIds = _.union(notifiableUserIds, memberUserIds, [
-            values.card.creatorUserId,
-          ]);
+          const extraUsers = [values.card.creatorUserId];
+          if (
+            action.type === Action.Types.TASK_DUE_DATE &&
+            action.data &&
+            action.data.task &&
+            action.data.task.assigneeUserId
+          ) {
+            extraUsers.push(action.data.task.assigneeUserId);
+          }
+
+          notifiableUserIds = _.union(notifiableUserIds, memberUserIds, extraUsers);
           // Filter out null/undefined userIds to prevent Notification.createEach
           // from failing validation (userId is required), which would rollback
           // the entire transaction and prevent ALL notifications from being created.

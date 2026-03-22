@@ -50,6 +50,12 @@
  *                 type: boolean
  *                 description: Whether the task is completed
  *                 example: true
+ *               dueDate:
+ *                 type: string
+ *                 format: date-time
+ *                 nullable: true
+ *                 description: Due date for the task
+ *                 example: 2024-01-01T00:00:00.000Z
  *     responses:
  *       200:
  *         description: Task updated successfully
@@ -72,6 +78,7 @@
  *         $ref: '#/components/responses/NotFound'
  */
 
+const { isDueDate } = require('../../../utils/validators');
 const { idInput } = require('../../../utils/inputs');
 
 const Errors = {
@@ -111,6 +118,11 @@ module.exports = {
     },
     isCompleted: {
       type: 'boolean',
+    },
+    dueDate: {
+      type: 'string',
+      custom: isDueDate,
+      allowNull: true,
     },
   },
 
@@ -182,7 +194,7 @@ module.exports = {
       }
     }
 
-    const values = _.pick(inputs, ['assigneeUserId', 'position', 'name', 'isCompleted']);
+    const values = _.pick(inputs, ['assigneeUserId', 'position', 'name', 'isCompleted', 'dueDate']);
 
     task = await sails.helpers.tasks.updateOne.with({
       project,

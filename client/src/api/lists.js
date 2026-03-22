@@ -9,6 +9,7 @@ import socket from './socket';
 import { transformCard } from './cards';
 import { transformAttachment } from './attachments';
 import { transformActivity } from './activities';
+import { transformTask } from './tasks';
 
 /* Actions */
 
@@ -22,6 +23,9 @@ const getList = (id, headers) =>
       ...body.included,
       cards: body.included.cards.map(transformCard),
       attachments: body.included.attachments.map(transformAttachment),
+      ...(body.included.tasks && {
+        tasks: body.included.tasks.map(transformTask),
+      }),
     },
   }));
 

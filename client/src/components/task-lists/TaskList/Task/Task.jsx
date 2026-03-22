@@ -23,8 +23,10 @@ import Paths from '../../../../constants/Paths';
 import EditName from './EditName';
 import SelectAssigneeStep from './SelectAssigneeStep';
 import ActionsStep from './ActionsStep';
+import EditDueDateStep from './EditDueDateStep';
 import Linkify from '../../../common/Linkify';
 import UserAvatar from '../../../users/UserAvatar';
+import DueDateChip from '../../../cards/DueDateChip';
 
 import styles from './Task.module.scss';
 
@@ -62,6 +64,8 @@ const Task = React.memo(({ id, index }) => {
   const dispatch = useDispatch();
   const [isEditNameOpened, setIsEditNameOpened] = useState(false);
   const [, , setIsClosableActive] = useContext(ClosableContext);
+
+  const EditDueDatePopup = usePopupInClosableContext(EditDueDateStep);
 
   const handleToggleChange = useCallback(() => {
     dispatch(
@@ -186,6 +190,27 @@ const Task = React.memo(({ id, index }) => {
                     )}
                   </span>
                 </span>
+                {task.dueDate && (
+                  <span className={styles.dueDateBadge}>
+                    {isEditable ? (
+                      <EditDueDatePopup taskId={task.id}>
+                        <DueDateChip
+                          withStatusIcon
+                          value={task.dueDate}
+                          isCompleted={task.isCompleted}
+                          withStatus
+                        />
+                      </EditDueDatePopup>
+                    ) : (
+                      <DueDateChip
+                        withStatusIcon
+                        value={task.dueDate}
+                        isCompleted={task.isCompleted}
+                        withStatus
+                      />
+                    )}
+                  </span>
+                )}
                 {(task.assigneeUserId || isEditable) && (
                   <div className={classNames(styles.actions, isEditable && styles.actionsEditable)}>
                     {isEditable ? (

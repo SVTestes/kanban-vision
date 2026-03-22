@@ -192,6 +192,31 @@ const Item = React.memo(({ id, onClose }) => {
       );
       break;
     }
+    case NotificationTypes.TASK_DUE_DATE: {
+      const taskName = notification.data?.task?.name || '';
+      actionTextNode = (
+        <Trans
+          i18nKey="common.dueDateExpiredForTask"
+          values={{
+            task: taskName,
+            card: cardName,
+          }}
+        >
+          <span className={styles.author}>{creatorUserName}</span>
+          {` due date expired for task `}
+          <strong>{taskName}</strong>
+          {` on `}
+          <Link
+            to={Paths.CARDS.replace(':id', notification.cardId)}
+            onClick={onClose}
+            className={styles.cardLink}
+          >
+            {cardName}
+          </Link>
+        </Trans>
+      );
+      break;
+    }
     default:
       actionTextNode = null;
   }

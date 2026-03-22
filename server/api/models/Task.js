@@ -21,7 +21,6 @@
  *         - taskListId
  *         - linkedCardId
  *         - assigneeUserId
- *         - position
  *         - name
  *         - isCompleted
  *         - createdAt
@@ -58,6 +57,12 @@
  *           default: false
  *           description: Whether the task is completed
  *           example: false
+ *         dueDate:
+ *           type: string
+ *           format: date-time
+ *           nullable: true
+ *           description: Due date for the task
+ *           example: 2024-01-01T00:00:00.000Z
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -90,6 +95,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false,
       columnName: 'is_completed',
+    },
+    dueDate: {
+      type: 'ref',
+      columnName: 'due_date',
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

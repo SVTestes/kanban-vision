@@ -107,6 +107,7 @@ export const NotificationTypes = {
   ADD_MEMBER_TO_CARD: 'addMemberToCard',
   MENTION_IN_COMMENT: 'mentionInComment',
   DUE_DATE: 'dueDate',
+  TASK_DUE_DATE: 'taskDueDate',
 };
 
 export const NotificationServiceFormats = {

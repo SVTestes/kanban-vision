@@ -109,7 +109,7 @@ services:
 
   postgres:
     image: postgres:16-alpine
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:

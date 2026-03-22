@@ -177,6 +177,7 @@ export default {
       display: 'Exibir',
       dropFileToUpload: 'Solte o arquivo para enviar',
       dueDateExpiredForCard: 'Data de vencimento expirou para <2>{{card}}</2>',
+      dueDateExpiredForTask: 'Data de vencimento expirou para a tarefa <2>{{task}}</2> em <4>{{card}}</4>',
       dueDate_title: 'Data de vencimento',
       daily: 'Diariamente',
       weekly: 'Semanalmente',

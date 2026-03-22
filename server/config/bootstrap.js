@@ -83,6 +83,79 @@ module.exports.bootstrap = async () => {
     }
   }, 60000); // 1 minute
 
+  // Check for task due dates that have expired
+  setInterval(async () => {
+    try {
+      const now = new Date();
+      sails.log.verbose('Task due date cron: checking at', now.toISOString());
+      const tasks = await Task.find({
+        dueDate: { '<=': now },
+        isCompleted: false,
+      });
+
+      if (tasks.length === 0) {
+        return;
+      }
+
+      sails.log.info('Task due date cron: found', tasks.length, 'task(s) with expired due dates');
+      const webhooks = await Webhook.qm.getAll();
+
+      await Promise.all(
+        tasks.map(async (task) => {
+          try {
+            const taskList = await TaskList.findOne({ id: task.taskListId });
+            if (!taskList) return;
+            const card = await Card.findOne({ id: taskList.cardId });
+            if (!card) return;
+
+            const existingActions = await Action.find({
+              cardId: card.id,
+              type: Action.Types.TASK_DUE_DATE,
+            });
+            const alreadyNotified = existingActions.some(
+              (a) => a.data && a.data.task && a.data.task.id === task.id,
+            );
+            if (alreadyNotified) {
+              return;
+            }
+
+            const list = await List.findOne({ id: card.listId });
+            if (!list) return;
+            const board = await Board.findOne({ id: list.boardId });
+            if (!board) return;
+            const project = await Project.findOne({ id: board.projectId });
+            if (!project) return;
+
+            await sails.helpers.actions.createOne.with({
+              values: {
+                card,
+                type: Action.Types.TASK_DUE_DATE,
+                data: {
+                  task,
+                },
+                user: null,
+              },
+              project,
+              board,
+              list,
+              webhooks,
+            });
+            sails.log.info(
+              'Task due date cron: created notification for task',
+              task.id,
+              '-',
+              task.name,
+            );
+          } catch (taskErr) {
+            sails.log.error('Task due date cron: error processing task', task.id, taskErr);
+          }
+        }),
+      );
+    } catch (err) {
+      sails.log.error('Task due date cron: error checking due dates:', err);
+    }
+  }, 60000); // 1 minute
+
   // Check for card recurrences
   setInterval(async () => {
     try {

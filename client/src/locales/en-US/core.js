@@ -170,6 +170,7 @@ export default {
       dropFileToUpload: 'Drop file to upload',
       dropdownTitle: 'Dropdown Title',
       dueDateExpiredForCard: 'Due date expired for <2>{{card}}</2>',
+      dueDateExpiredForTask: 'Due date expired for task <2>{{task}}</2> on <4>{{card}}</4>',
       dueDate_title: 'Due Date',
       daily: 'Daily',
       weekly: 'Weekly',

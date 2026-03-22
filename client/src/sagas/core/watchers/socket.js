@@ -199,17 +199,17 @@ const createSocketEventsChannel = () =>
       emit(entryActions.handleTaskListDelete(item));
     };
 
-    const handleTaskCreate = ({ item }) => {
+    const handleTaskCreate = api.makeHandleTaskCreate(({ item }) => {
       emit(entryActions.handleTaskCreate(item));
-    };
+    });
 
-    const handleTaskUpdate = ({ item }) => {
+    const handleTaskUpdate = api.makeHandleTaskUpdate(({ item }) => {
       emit(entryActions.handleTaskUpdate(item));
-    };
+    });
 
-    const handleTaskDelete = ({ item }) => {
+    const handleTaskDelete = api.makeHandleTaskDelete(({ item }) => {
       emit(entryActions.handleTaskDelete(item));
-    };
+    });
 
     const handleAttachmentCreate = api.makeHandleAttachmentCreate(({ item, requestId }) => {
       emit(entryActions.handleAttachmentCreate(item, requestId));

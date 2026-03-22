@@ -14,11 +14,13 @@ import selectors from '../../../../selectors';
 import entryActions from '../../../../entry-actions';
 import { useSteps } from '../../../../hooks';
 import ConfirmationStep from '../../../common/ConfirmationStep';
+import EditDueDateStep from './EditDueDateStep';
 
 import styles from './ActionsStep.module.scss';
 
 const StepTypes = {
   DELETE: 'DELETE',
+  EDIT_DUE_DATE: 'EDIT_DUE_DATE',
 };
 
 const ActionsStep = React.memo(({ taskId, onNameEdit, onClose }) => {
@@ -43,6 +45,10 @@ const ActionsStep = React.memo(({ taskId, onNameEdit, onClose }) => {
     openStep(StepTypes.DELETE);
   }, [openStep]);
 
+  const handleEditDueDateClick = useCallback(() => {
+    openStep(StepTypes.EDIT_DUE_DATE);
+  }, [openStep]);
+
   if (step && step.type === StepTypes.DELETE) {
     return (
       <ConfirmationStep
@@ -53,6 +59,10 @@ const ActionsStep = React.memo(({ taskId, onNameEdit, onClose }) => {
         onBack={handleBack}
       />
     );
+  }
+
+  if (step && step.type === StepTypes.EDIT_DUE_DATE) {
+    return <EditDueDateStep taskId={taskId} onBack={handleBack} onClose={onClose} />;
   }
 
   return (
@@ -72,6 +82,12 @@ const ActionsStep = React.memo(({ taskId, onNameEdit, onClose }) => {
               })}
             </Menu.Item>
           )}
+          <Menu.Item className={styles.menuItem} onClick={handleEditDueDateClick}>
+            <Icon name="calendar check outline" className={styles.menuItemIcon} />
+            {t('common.editDueDate', {
+              context: 'title',
+            })}
+          </Menu.Item>
           <Menu.Item className={styles.menuItem} onClick={handleDeleteClick}>
             <Icon name="trash alternate outline" className={styles.menuItemIcon} />
             {t('action.deleteTask', {

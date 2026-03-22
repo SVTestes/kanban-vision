@@ -75,10 +75,21 @@ const Types = {
   COMPLETE_TASK: 'completeTask',
   UNCOMPLETE_TASK: 'uncompleteTask',
   DUE_DATE: 'dueDate',
+  TASK_DUE_DATE: 'taskDueDate',
 };
 
-const INTERNAL_NOTIFIABLE_TYPES = [Types.MOVE_CARD, Types.ADD_MEMBER_TO_CARD, Types.DUE_DATE];
-const EXTERNAL_NOTIFIABLE_TYPES = [Types.CREATE_CARD, Types.MOVE_CARD, Types.DUE_DATE];
+const INTERNAL_NOTIFIABLE_TYPES = [
+  Types.MOVE_CARD,
+  Types.ADD_MEMBER_TO_CARD,
+  Types.DUE_DATE,
+  Types.TASK_DUE_DATE,
+];
+const EXTERNAL_NOTIFIABLE_TYPES = [
+  Types.CREATE_CARD,
+  Types.MOVE_CARD,
+  Types.DUE_DATE,
+  Types.TASK_DUE_DATE,
+];
 const PERSONAL_NOTIFIABLE_TYPES = [Types.ADD_MEMBER_TO_CARD];
 
 module.exports = {
