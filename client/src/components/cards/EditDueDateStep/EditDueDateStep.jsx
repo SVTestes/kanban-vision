@@ -28,7 +28,7 @@ const EditDueDateStep = React.memo(({ cardId, onBack, onClose }) => {
   const [t] = useTranslation();
 
   const [data, handleFieldChange, setData] = useForm(() => {
-    const date = defaultValue || new Date().setHours(12, 0, 0, 0);
+    const date = defaultValue || new Date().setHours(18, 0, 0, 0);
 
     return {
       date: t('format:date', {
