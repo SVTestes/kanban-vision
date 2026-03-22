@@ -443,6 +443,27 @@ export const selectActivityIdsForCurrentCard = createSelector(
   },
 );
 
+export const selectCardRecurrencesForCurrentCard = createSelector(
+  orm,
+  (state) => selectPath(state).cardId,
+  ({ Card }, id) => {
+    if (!id) {
+      return [];
+    }
+
+    const cardModel = Card.withId(id);
+
+    if (!cardModel) {
+      return [];
+    }
+
+    return cardModel.recurrences.toModelArray().map((model) => ({
+      ...model.ref,
+      targetList: model.targetList ? model.targetList.ref : null,
+    }));
+  },
+);
+
 export const selectIsCurrentUserInCurrentCard = createSelector(
   orm,
   (state) => selectPath(state).cardId,
@@ -494,5 +515,6 @@ export default {
   selectCustomFieldGroupIdsForCurrentCard,
   selectCommentIdsForCurrentCard,
   selectActivityIdsForCurrentCard,
+  selectCardRecurrencesForCurrentCard,
   selectIsCurrentUserInCurrentCard,
 };

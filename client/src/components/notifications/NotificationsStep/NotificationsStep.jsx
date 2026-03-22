@@ -63,7 +63,7 @@ const NotificationsStep = React.memo(({ onClose }) => {
         <div className={styles.filterToggle}>
           <Checkbox
             toggle
-            label={t('action.showOnlyUnread', 'Mostrar apenas itens não lidos')}
+            label={t('action.showOnlyUnread', 'Show only unread')}
             checked={showUnreadOnly}
             onChange={handleToggleUnread}
           />

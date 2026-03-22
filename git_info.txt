@@ -1,0 +1,521 @@
+﻿On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   client/src/actions/index.js
+	modified:   client/src/api/index.js
+	modified:   client/src/components/cards/CardModal/MoreActionsStep.jsx
+	modified:   client/src/components/cards/CardModal/ProjectContent.jsx
+	modified:   client/src/components/cards/CardModal/StoryContent.jsx
+	modified:   client/src/components/notifications/NotificationsStep/Item.jsx
+	modified:   client/src/components/notifications/NotificationsStep/NotificationsStep.jsx
+	modified:   client/src/constants/ActionTypes.js
+	modified:   client/src/constants/EntryActionTypes.js
+	modified:   client/src/constants/Enums.js
+	modified:   client/src/entry-actions/index.js
+	modified:   client/src/locales/en-US/core.js
+	modified:   client/src/locales/pt-BR/core.js
+	modified:   client/src/models/Card.js
+	modified:   client/src/models/index.js
+	modified:   client/src/orm.js
+	modified:   client/src/sagas/core/services/index.js
+	modified:   client/src/sagas/core/watchers/index.js
+	modified:   client/src/selectors/cards.js
+	modified:   docker-compose-dev.yml
+	modified:   server/api/controllers/_internal/update-config.js
+	modified:   server/api/controllers/access-tokens/accept-terms.js
+	modified:   server/api/controllers/access-tokens/create.js
+	modified:   server/api/controllers/access-tokens/debug-oidc.js
+	modified:   server/api/controllers/access-tokens/delete.js
+	modified:   server/api/controllers/access-tokens/exchange-with-oidc.js
+	modified:   server/api/controllers/access-tokens/revoke-pending-token.js
+	modified:   server/api/controllers/actions/index-in-board.js
+	modified:   server/api/controllers/actions/index-in-card.js
+	modified:   server/api/controllers/attachments/create.js
+	modified:   server/api/controllers/attachments/delete.js
+	modified:   server/api/controllers/attachments/update.js
+	modified:   server/api/controllers/background-images/create.js
+	modified:   server/api/controllers/background-images/delete.js
+	modified:   server/api/controllers/base-custom-field-groups/create.js
+	modified:   server/api/controllers/base-custom-field-groups/delete.js
+	modified:   server/api/controllers/base-custom-field-groups/update.js
+	modified:   server/api/controllers/board-memberships/create.js
+	modified:   server/api/controllers/board-memberships/delete.js
+	modified:   server/api/controllers/board-memberships/update.js
+	modified:   server/api/controllers/boards/create.js
+	modified:   server/api/controllers/boards/delete.js
+	modified:   server/api/controllers/boards/show.js
+	modified:   server/api/controllers/boards/update.js
+	modified:   server/api/controllers/bootstrap/show.js
+	modified:   server/api/controllers/card-labels/create.js
+	modified:   server/api/controllers/card-labels/delete.js
+	modified:   server/api/controllers/card-memberships/create.js
+	modified:   server/api/controllers/card-memberships/delete.js
+	modified:   server/api/controllers/cards/create.js
+	modified:   server/api/controllers/cards/delete.js
+	modified:   server/api/controllers/cards/duplicate.js
+	modified:   server/api/controllers/cards/index.js
+	modified:   server/api/controllers/cards/read-notifications.js
+	modified:   server/api/controllers/cards/show.js
+	modified:   server/api/controllers/cards/update.js
+	modified:   server/api/controllers/comments/create.js
+	modified:   server/api/controllers/comments/delete.js
+	modified:   server/api/controllers/comments/index.js
+	modified:   server/api/controllers/comments/update.js
+	modified:   server/api/controllers/config/show.js
+	modified:   server/api/controllers/config/test-smtp.js
+	modified:   server/api/controllers/config/update.js
+	modified:   server/api/controllers/custom-field-groups/create-in-board.js
+	modified:   server/api/controllers/custom-field-groups/create-in-card.js
+	modified:   server/api/controllers/custom-field-groups/delete.js
+	modified:   server/api/controllers/custom-field-groups/show.js
+	modified:   server/api/controllers/custom-field-groups/update.js
+	modified:   server/api/controllers/custom-field-values/create-or-update.js
+	modified:   server/api/controllers/custom-field-values/delete.js
+	modified:   server/api/controllers/custom-fields/create-in-base-custom-field-group.js
+	modified:   server/api/controllers/custom-fields/create-in-custom-field-group.js
+	modified:   server/api/controllers/custom-fields/delete.js
+	modified:   server/api/controllers/custom-fields/update.js
+	modified:   server/api/controllers/file-attachments/download-thumbnail.js
+	modified:   server/api/controllers/file-attachments/download.js
+	modified:   server/api/controllers/labels/create.js
+	modified:   server/api/controllers/labels/delete.js
+	modified:   server/api/controllers/labels/update.js
+	modified:   server/api/controllers/lists/clear.js
+	modified:   server/api/controllers/lists/create.js
+	modified:   server/api/controllers/lists/delete.js
+	modified:   server/api/controllers/lists/move-cards.js
+	modified:   server/api/controllers/lists/show.js
+	modified:   server/api/controllers/lists/sort.js
+	modified:   server/api/controllers/lists/update.js
+	modified:   server/api/controllers/notification-services/create-in-board.js
+	modified:   server/api/controllers/notification-services/create-in-user.js
+	modified:   server/api/controllers/notification-services/delete.js
+	modified:   server/api/controllers/notification-services/test.js
+	modified:   server/api/controllers/notification-services/update.js
+	modified:   server/api/controllers/notifications/index.js
+	modified:   server/api/controllers/notifications/read-all.js
+	modified:   server/api/controllers/notifications/show.js
+	modified:   server/api/controllers/notifications/update.js
+	modified:   server/api/controllers/project-managers/create.js
+	modified:   server/api/controllers/project-managers/delete.js
+	modified:   server/api/controllers/projects/create.js
+	modified:   server/api/controllers/projects/delete.js
+	modified:   server/api/controllers/projects/index.js
+	modified:   server/api/controllers/projects/show.js
+	modified:   server/api/controllers/projects/update.js
+	modified:   server/api/controllers/task-lists/create.js
+	modified:   server/api/controllers/task-lists/delete.js
+	modified:   server/api/controllers/task-lists/show.js
+	modified:   server/api/controllers/task-lists/update.js
+	modified:   server/api/controllers/tasks/create.js
+	modified:   server/api/controllers/tasks/delete.js
+	modified:   server/api/controllers/tasks/update.js
+	modified:   server/api/controllers/terms/show.js
+	modified:   server/api/controllers/users/create-api-key.js
+	modified:   server/api/controllers/users/create.js
+	modified:   server/api/controllers/users/delete.js
+	modified:   server/api/controllers/users/index.js
+	modified:   server/api/controllers/users/show.js
+	modified:   server/api/controllers/users/update-avatar.js
+	modified:   server/api/controllers/users/update-email.js
+	modified:   server/api/controllers/users/update-password.js
+	modified:   server/api/controllers/users/update-username.js
+	modified:   server/api/controllers/users/update.js
+	modified:   server/api/controllers/webhooks/create.js
+	modified:   server/api/controllers/webhooks/delete.js
+	modified:   server/api/controllers/webhooks/index.js
+	modified:   server/api/controllers/webhooks/update.js
+	modified:   server/api/helpers/access-tokens/handle-steps.js
+	modified:   server/api/helpers/actions/create-one.js
+	modified:   server/api/helpers/attachments/create-one.js
+	modified:   server/api/helpers/attachments/delete-one.js
+	modified:   server/api/helpers/attachments/get-path-to-project-by-id.js
+	modified:   server/api/helpers/attachments/present-many.js
+	modified:   server/api/helpers/attachments/present-one.js
+	modified:   server/api/helpers/attachments/process-link.js
+	modified:   server/api/helpers/attachments/process-uploaded-file.js
+	modified:   server/api/helpers/attachments/update-one.js
+	modified:   server/api/helpers/background-images/create-one.js
+	modified:   server/api/helpers/background-images/delete-one.js
+	modified:   server/api/helpers/background-images/get-path-to-project-by-id.js
+	modified:   server/api/helpers/background-images/present-many.js
+	modified:   server/api/helpers/background-images/present-one.js
+	modified:   server/api/helpers/background-images/process-uploaded-file.js
+	modified:   server/api/helpers/base-custom-field-groups/create-one.js
+	modified:   server/api/helpers/base-custom-field-groups/delete-one.js
+	modified:   server/api/helpers/base-custom-field-groups/delete-related.js
+	modified:   server/api/helpers/base-custom-field-groups/get-path-to-project-by-id.js
+	modified:   server/api/helpers/base-custom-field-groups/update-one.js
+	modified:   server/api/helpers/board-memberships/create-one.js
+	modified:   server/api/helpers/board-memberships/delete-one.js
+	modified:   server/api/helpers/board-memberships/get-path-to-project-by-id.js
+	modified:   server/api/helpers/board-memberships/update-one.js
+	modified:   server/api/helpers/boards/create-one.js
+	modified:   server/api/helpers/boards/delete-one.js
+	modified:   server/api/helpers/boards/delete-related.js
+	modified:   server/api/helpers/boards/get-card-ids.js
+	modified:   server/api/helpers/boards/get-kanban-lists-by-id.js
+	modified:   server/api/helpers/boards/get-member-user-ids.js
+	modified:   server/api/helpers/boards/get-notification-services-total.js
+	modified:   server/api/helpers/boards/get-path-to-project-by-id.js
+	modified:   server/api/helpers/boards/get-subscription-user-ids.js
+	modified:   server/api/helpers/boards/import-from-trello.js
+	modified:   server/api/helpers/boards/process-uploaded-trello-import-file.js
+	modified:   server/api/helpers/boards/update-one.js
+	modified:   server/api/helpers/bootstrap/present-one.js
+	modified:   server/api/helpers/card-labels/create-one.js
+	modified:   server/api/helpers/card-labels/delete-one.js
+	modified:   server/api/helpers/card-memberships/create-one.js
+	modified:   server/api/helpers/card-memberships/delete-one.js
+	modified:   server/api/helpers/cards/copy-custom-fields.js
+	modified:   server/api/helpers/cards/create-one.js
+	modified:   server/api/helpers/cards/delete-one.js
+	modified:   server/api/helpers/cards/delete-related.js
+	modified:   server/api/helpers/cards/detach-custom-fields.js
+	modified:   server/api/helpers/cards/duplicate-one.js
+	modified:   server/api/helpers/cards/get-labels.js
+	modified:   server/api/helpers/cards/get-path-to-project-by-id.js
+	modified:   server/api/helpers/cards/get-subscription-user-ids.js
+	modified:   server/api/helpers/cards/read-notifications-for-user.js
+	modified:   server/api/helpers/cards/update-one.js
+	modified:   server/api/helpers/comments/create-one.js
+	modified:   server/api/helpers/comments/delete-one.js
+	modified:   server/api/helpers/comments/get-path-to-project-by-id.js
+	modified:   server/api/helpers/comments/update-one.js
+	modified:   server/api/helpers/config/present-one.js
+	modified:   server/api/helpers/config/update-main.js
+	modified:   server/api/helpers/custom-field-groups/create-one-in-board.js
+	modified:   server/api/helpers/custom-field-groups/create-one-in-card.js
+	modified:   server/api/helpers/custom-field-groups/delete-one-in-board.js
+	modified:   server/api/helpers/custom-field-groups/delete-one-in-card.js
+	modified:   server/api/helpers/custom-field-groups/delete-related.js
+	modified:   server/api/helpers/custom-field-groups/get-path-to-project-by-id.js
+	modified:   server/api/helpers/custom-field-groups/update-one-in-board.js
+	modified:   server/api/helpers/custom-field-groups/update-one-in-card.js
+	modified:   server/api/helpers/custom-field-values/create-or-update-one.js
+	modified:   server/api/helpers/custom-field-values/delete-one.js
+	modified:   server/api/helpers/custom-fields/create-one-in-base-custom-field-group.js
+	modified:   server/api/helpers/custom-fields/create-one-in-custom-field-group.js
+	modified:   server/api/helpers/custom-fields/delete-one-in-base-custom-field-group.js
+	modified:   server/api/helpers/custom-fields/delete-one-in-custom-field-group.js
+	modified:   server/api/helpers/custom-fields/delete-related.js
+	modified:   server/api/helpers/custom-fields/get-path-to-project-by-id.js
+	modified:   server/api/helpers/custom-fields/update-one-in-base-custom-field-group.js
+	modified:   server/api/helpers/custom-fields/update-one-in-custom-field-group.js
+	modified:   server/api/helpers/internal-config/update-main.js
+	modified:   server/api/helpers/labels/create-one.js
+	modified:   server/api/helpers/labels/delete-one.js
+	modified:   server/api/helpers/labels/delete-related.js
+	modified:   server/api/helpers/labels/get-path-to-project-by-id.js
+	modified:   server/api/helpers/labels/update-one.js
+	modified:   server/api/helpers/lists/clear-one.js
+	modified:   server/api/helpers/lists/create-one.js
+	modified:   server/api/helpers/lists/delete-one.js
+	modified:   server/api/helpers/lists/delete-related.js
+	modified:   server/api/helpers/lists/get-path-to-project-by-id.js
+	modified:   server/api/helpers/lists/is-archive-or-trash.js
+	modified:   server/api/helpers/lists/is-finite.js
+	modified:   server/api/helpers/lists/is-kanban.js
+	modified:   server/api/helpers/lists/move-cards.js
+	modified:   server/api/helpers/lists/resolve-name.js
+	modified:   server/api/helpers/lists/sort-one.js
+	modified:   server/api/helpers/lists/update-one.js
+	modified:   server/api/helpers/notification-services/create-one-in-board.js
+	modified:   server/api/helpers/notification-services/create-one-in-user.js
+	modified:   server/api/helpers/notification-services/delete-one-in-board.js
+	modified:   server/api/helpers/notification-services/delete-one-in-user.js
+	modified:   server/api/helpers/notification-services/get-path-to-user-by-id.js
+	modified:   server/api/helpers/notification-services/update-one-in-board.js
+	modified:   server/api/helpers/notification-services/update-one-in-user.js
+	modified:   server/api/helpers/notifications/create-many.js
+	modified:   server/api/helpers/notifications/create-one.js
+	modified:   server/api/helpers/notifications/read-all-for-user.js
+	modified:   server/api/helpers/notifications/update-one.js
+	modified:   server/api/helpers/project-managers/create-one.js
+	modified:   server/api/helpers/project-managers/delete-one.js
+	modified:   server/api/helpers/project-managers/get-path-to-project-by-id.js
+	modified:   server/api/helpers/projects/create-one.js
+	modified:   server/api/helpers/projects/delete-one.js
+	modified:   server/api/helpers/projects/delete-related.js
+	modified:   server/api/helpers/projects/get-board-ids-by-id.js
+	modified:   server/api/helpers/projects/get-board-memberships-total-by-id-and-user-id.js
+	modified:   server/api/helpers/projects/get-boards-total-by-id.js
+	modified:   server/api/helpers/projects/get-lonely-by-ids.js
+	modified:   server/api/helpers/projects/get-manager-user-ids.js
+	modified:   server/api/helpers/projects/get-project-managers-total-by-id.js
+	modified:   server/api/helpers/projects/make-scoper.js
+	modified:   server/api/helpers/projects/update-one.js
+	modified:   server/api/helpers/sessions/create-one.js
+	modified:   server/api/helpers/task-lists/create-one.js
+	modified:   server/api/helpers/task-lists/delete-one.js
+	modified:   server/api/helpers/task-lists/delete-related.js
+	modified:   server/api/helpers/task-lists/get-path-to-project-by-id.js
+	modified:   server/api/helpers/task-lists/update-one.js
+	modified:   server/api/helpers/tasks/create-one.js
+	modified:   server/api/helpers/tasks/delete-one.js
+	modified:   server/api/helpers/tasks/get-path-to-project-by-id.js
+	modified:   server/api/helpers/tasks/update-one.js
+	modified:   server/api/helpers/users/build-gravatar-url.js
+	modified:   server/api/helpers/users/create-one.js
+	modified:   server/api/helpers/users/delete-one.js
+	modified:   server/api/helpers/users/delete-related.js
+	modified:   server/api/helpers/users/get-all-active-ids.js
+	modified:   server/api/helpers/users/get-manager-project-ids.js
+	modified:   server/api/helpers/users/get-notification-services-total.js
+	modified:   server/api/helpers/users/get-or-create-one-with-oidc.js
+	modified:   server/api/helpers/users/get-project-managers-total-by-id.js
+	modified:   server/api/helpers/users/is-admin-or-project-owner.js
+	modified:   server/api/helpers/users/is-board-member.js
+	modified:   server/api/helpers/users/is-board-subscriber.js
+	modified:   server/api/helpers/users/is-card-subscriber.js
+	modified:   server/api/helpers/users/is-project-favorite.js
+	modified:   server/api/helpers/users/is-project-manager.js
+	modified:   server/api/helpers/users/make-scoper.js
+	modified:   server/api/helpers/users/present-many.js
+	modified:   server/api/helpers/users/present-one.js
+	modified:   server/api/helpers/users/process-uploaded-avatar-file.js
+	modified:   server/api/helpers/users/update-one.js
+	modified:   server/api/helpers/utils/clear-http-only-token-cookie.js
+	modified:   server/api/helpers/utils/create-jwt-token.js
+	modified:   server/api/helpers/utils/download-favicon.js
+	modified:   server/api/helpers/utils/generate-api-key.js
+	modified:   server/api/helpers/utils/generate-ids.js
+	modified:   server/api/helpers/utils/generate-random-string.js
+	modified:   server/api/helpers/utils/get-available-storage.js
+	modified:   server/api/helpers/utils/hash.js
+	modified:   server/api/helpers/utils/insert-to-positionables.js
+	modified:   server/api/helpers/utils/is-preloaded-favicon-exists.js
+	modified:   server/api/helpers/utils/make-smtp-transporter.js
+	modified:   server/api/helpers/utils/make-translator.js
+	modified:   server/api/helpers/utils/map-records.js
+	modified:   server/api/helpers/utils/receive-file.js
+	modified:   server/api/helpers/utils/remove-unreferenced-uploaded-files.js
+	modified:   server/api/helpers/utils/send-email.js
+	modified:   server/api/helpers/utils/send-notifications.js
+	modified:   server/api/helpers/utils/send-webhooks.js
+	modified:   server/api/helpers/utils/set-http-only-token-cookie.js
+	modified:   server/api/helpers/utils/verify-jwt-token.js
+	modified:   server/api/helpers/webhooks/create-one.js
+	modified:   server/api/helpers/webhooks/delete-one.js
+	modified:   server/api/helpers/webhooks/update-one.js
+	modified:   server/api/hooks/current-user/index.js
+	modified:   server/api/hooks/file-manager/LocalFileManager.js
+	modified:   server/api/hooks/file-manager/S3FileManager.js
+	modified:   server/api/hooks/file-manager/index.js
+	modified:   server/api/hooks/oidc/index.js
+	modified:   server/api/hooks/query-methods/helpers.js
+	modified:   server/api/hooks/query-methods/index.js
+	modified:   server/api/hooks/query-methods/models/Action.js
+	modified:   server/api/hooks/query-methods/models/Attachment.js
+	modified:   server/api/hooks/query-methods/models/BackgroundImage.js
+	modified:   server/api/hooks/query-methods/models/BaseCustomFieldGroup.js
+	modified:   server/api/hooks/query-methods/models/Board.js
+	modified:   server/api/hooks/query-methods/models/BoardMembership.js
+	modified:   server/api/hooks/query-methods/models/BoardSubscription.js
+	modified:   server/api/hooks/query-methods/models/Card.js
+	modified:   server/api/hooks/query-methods/models/CardLabel.js
+	modified:   server/api/hooks/query-methods/models/CardMembership.js
+	modified:   server/api/hooks/query-methods/models/CardSubscription.js
+	modified:   server/api/hooks/query-methods/models/Comment.js
+	modified:   server/api/hooks/query-methods/models/Config.js
+	modified:   server/api/hooks/query-methods/models/CustomField.js
+	modified:   server/api/hooks/query-methods/models/CustomFieldGroup.js
+	modified:   server/api/hooks/query-methods/models/CustomFieldValue.js
+	modified:   server/api/hooks/query-methods/models/IdentityProviderUser.js
+	modified:   server/api/hooks/query-methods/models/InternalConfig.js
+	modified:   server/api/hooks/query-methods/models/Label.js
+	modified:   server/api/hooks/query-methods/models/List.js
+	modified:   server/api/hooks/query-methods/models/Notification.js
+	modified:   server/api/hooks/query-methods/models/NotificationService.js
+	modified:   server/api/hooks/query-methods/models/Project.js
+	modified:   server/api/hooks/query-methods/models/ProjectFavorite.js
+	modified:   server/api/hooks/query-methods/models/ProjectManager.js
+	modified:   server/api/hooks/query-methods/models/Session.js
+	modified:   server/api/hooks/query-methods/models/StorageUsage.js
+	modified:   server/api/hooks/query-methods/models/Task.js
+	modified:   server/api/hooks/query-methods/models/TaskList.js
+	modified:   server/api/hooks/query-methods/models/UploadedFile.js
+	modified:   server/api/hooks/query-methods/models/User.js
+	modified:   server/api/hooks/query-methods/models/Webhook.js
+	modified:   server/api/hooks/s3/index.js
+	modified:   server/api/hooks/terms/index.js
+	modified:   server/api/hooks/watcher/index.js
+	modified:   server/api/models/Action.js
+	modified:   server/api/models/Attachment.js
+	modified:   server/api/models/BackgroundImage.js
+	modified:   server/api/models/BaseCustomFieldGroup.js
+	modified:   server/api/models/Board.js
+	modified:   server/api/models/BoardMembership.js
+	modified:   server/api/models/BoardSubscription.js
+	modified:   server/api/models/Card.js
+	modified:   server/api/models/CardLabel.js
+	modified:   server/api/models/CardMembership.js
+	modified:   server/api/models/CardSubscription.js
+	modified:   server/api/models/Comment.js
+	modified:   server/api/models/Config.js
+	modified:   server/api/models/CustomField.js
+	modified:   server/api/models/CustomFieldGroup.js
+	modified:   server/api/models/CustomFieldValue.js
+	modified:   server/api/models/IdentityProviderUser.js
+	modified:   server/api/models/InternalConfig.js
+	modified:   server/api/models/Label.js
+	modified:   server/api/models/List.js
+	modified:   server/api/models/Notification.js
+	modified:   server/api/models/NotificationService.js
+	modified:   server/api/models/Project.js
+	modified:   server/api/models/ProjectFavorite.js
+	modified:   server/api/models/ProjectManager.js
+	modified:   server/api/models/Session.js
+	modified:   server/api/models/StorageUsage.js
+	modified:   server/api/models/Task.js
+	modified:   server/api/models/TaskList.js
+	modified:   server/api/models/UploadedFile.js
+	modified:   server/api/models/User.js
+	modified:   server/api/models/Webhook.js
+	modified:   server/api/policies/is-admin-or-project-owner.js
+	modified:   server/api/policies/is-admin.js
+	modified:   server/api/policies/is-authenticated.js
+	modified:   server/api/policies/is-external.js
+	modified:   server/api/policies/is-internal.js
+	modified:   server/api/policies/is-session.js
+	modified:   server/api/responses/conflict.js
+	modified:   server/api/responses/forbidden.js
+	modified:   server/api/responses/notFound.js
+	modified:   server/api/responses/unauthorized.js
+	modified:   server/api/responses/unprocessableEntity.js
+	modified:   server/api/responses/validationError.js
+	modified:   server/app.js
+	modified:   server/build.js
+	modified:   server/config/blueprints.js
+	modified:   server/config/bootstrap.js
+	modified:   server/config/custom.js
+	modified:   server/config/datastores.js
+	modified:   server/config/env/production.js
+	modified:   server/config/env/test.js
+	modified:   server/config/globals.js
+	modified:   server/config/http.js
+	modified:   server/config/i18n.js
+	modified:   server/config/locales/en-US.json
+	modified:   server/config/locales/pt-BR.json
+	modified:   server/config/log.js
+	modified:   server/config/models.js
+	modified:   server/config/policies.js
+	modified:   server/config/routes.js
+	modified:   server/config/security.js
+	modified:   server/config/session.js
+	modified:   server/config/sockets.js
+	modified:   server/config/swagger.js
+	modified:   server/config/views.js
+	modified:   server/constants.js
+	modified:   server/db/create-admin-user.js
+	modified:   server/db/init.js
+	modified:   server/db/knexfile.js
+	modified:   server/db/migrations/20250228000022_version_2.js
+	modified:   server/db/migrations/20250522151122_add_board_activity_log.js
+	modified:   server/db/migrations/20250523131647_add_comments_counter.js
+	modified:   server/db/migrations/20250603102521_canonicalize_locale_codes.js
+	modified:   server/db/migrations/20250703122452_move_webhooks_configuration_from_environment_variable_to_ui.js
+	modified:   server/db/migrations/20250708200908_persist_closed_state_per_card.js
+	modified:   server/db/migrations/20250709160208_add_ability_to_link_tasks_to_cards.js
+	modified:   server/db/migrations/20250721132312_add_ability_to_hide_completed_tasks.js
+	modified:   server/db/migrations/20250728105713_add_legal_requirements.js
+	modified:   server/db/migrations/20250820144730_track_storage_usage.js
+	modified:   server/db/migrations/20250905101408_restore_toggleable_due_dates.js
+	modified:   server/db/migrations/20250905205438_add_board_setting_to_expand_task_lists_by_default.js
+	modified:   server/db/migrations/20250917123048_add_ability_to_configure_smtp_via_ui.js
+	modified:   server/db/migrations/20251105104948_add_api_key_authentication.js
+	modified:   server/db/migrations/20251121231641_rename_gin_indexes.js
+	modified:   server/db/migrations/20260122093047_add_internal_runtime_configuration.js
+	modified:   server/db/seeds/default.js
+	modified:   server/db/upgrade.js
+	modified:   server/generate-swagger.js
+	modified:   server/healthcheck.js
+	modified:   server/test/integration/models/User.test.js
+	modified:   server/test/lifecycle.test.js
+	modified:   server/test/utils/remote-address.test.js
+	modified:   server/utils/build-query-parts.js
+	modified:   server/utils/filenamify.js
+	modified:   server/utils/inputs.js
+	modified:   server/utils/logger.js
+	modified:   server/utils/mentions.js
+	modified:   server/utils/migrations.js
+	modified:   server/utils/normalize-values.js
+	modified:   server/utils/remote-address.js
+	modified:   server/utils/validators.js
+	modified:   server/version.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	all_logs.txt
+	client/src/actions/card-recurrences.js
+	client/src/api/card-recurrences.js
+	client/src/components/cards/RepeatCardStep/
+	client/src/entry-actions/card-recurrences.js
+	client/src/models/CardRecurrence.js
+	client/src/sagas/core/services/card-recurrences.js
+	client/src/sagas/core/watchers/card-recurrences.js
+	docker-logs.txt
+	dplogs.txt
+	git_branch.txt
+	git_info.txt
+	git_log.txt
+	git_remote.txt
+	git_status.txt
+	inspect.txt
+	inspect2.txt
+	inspect_pg.txt
+	kanban-vision/
+	logs.txt
+	s_logs.txt
+	server-logs.txt
+	server/api/controllers/card-recurrences/
+	server/api/helpers/card-recurrences/
+	server/api/hooks/query-methods/models/CardRecurrence.js
+	server/api/models/CardRecurrence.js
+	server/create-notification.js
+	server/db/migrations/20260320140000_add_card_recurrence.js
+	server/fix-password.js
+	server/move-card.js
+	server_logs.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+* master aa863d41 [origin/master] fix: due date notifications not appearing - skip sendWebhooks when user is null
+origin	https://github.com/SVTestes/kanban-vision (fetch)
+origin	https://github.com/SVTestes/kanban-vision (push)
+commit aa863d41a983deddb544b2811febab91fcbe01a9
+Author: SVTestes <specialvisionteste1@gmail.com>
+Date:   Fri Mar 20 15:52:15 2026 -0300
+
+    fix: due date notifications not appearing - skip sendWebhooks when user is null
+    
+    - Wrap sendWebhooks calls in if(user) guard in 3 files:
+      actions/create-one.js, notifications/create-many.js, notifications/create-one.js
+    - Filter null userIds before creating notifications in actions/create-one.js
+    - Add diagnostic logging to bootstrap.js due date cron job
+
+commit 2be0f311309be75aa72c9886ea2ccac81004967b
+Author: SVTestes <specialvisionteste1@gmail.com>
+Date:   Sat Mar 14 11:06:21 2026 -0300
+
+    Update notifications UI and fix user creation
+
+commit 8700e4003e4f23bd94f71ed9396e9ba4eeb71e06
+Author: SVTestes <specialvisionteste1@gmail.com>
+Date:   Thu Feb 5 21:26:47 2026 -0300
+
+    update v2
+
+commit 4f96310df6ca12eca143469f03279c5ac0b37551
+Author: SVTestes <specialvisionteste1@gmail.com>
+Date:   Thu Feb 5 21:19:26 2026 -0300
+
+    secao atualizada
+
+commit 605c545c54a6bec3eaf762db22014cc9c129df89
+Author: SVTestes <specialvisionteste1@gmail.com>
+Date:   Thu Feb 5 21:09:22 2026 -0300
+
+    Unique Skill

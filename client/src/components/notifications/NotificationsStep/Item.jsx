@@ -3,7 +3,7 @@ import truncate from 'lodash/truncate';
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import selectors from '../../../selectors';
@@ -29,7 +29,9 @@ const Item = React.memo(({ id, onClose }) => {
   const notification = useSelector((state) => selectNotificationById(state, id));
 
   const creatorUser = useSelector((state) =>
-    selectCreatorUserById(state, notification.creatorUserId),
+    notification.creatorUserId
+      ? selectCreatorUserById(state, notification.creatorUserId)
+      : { name: 'system', isSystem: true },
   );
 
   const card = useSelector((state) => selectCardById(state, notification.cardId));
@@ -49,11 +51,16 @@ const Item = React.memo(({ id, onClose }) => {
     }
   }, [id, notification.isRead, dispatch]);
 
-  const creatorUserName = isUserStatic(creatorUser)
-    ? t(`common.${creatorUser.name}`, {
+  let creatorUserName = t('system', 'System');
+  if (creatorUser && !creatorUser.isSystem) {
+    if (isUserStatic(creatorUser)) {
+      creatorUserName = t(`common.${creatorUser.name}`, {
         context: 'title',
-      })
-    : creatorUser.name;
+      });
+    } else {
+      creatorUserName = creatorUser.name;
+    }
+  }
 
   const cardName = card ? card.name : notification.data?.card?.name || '';
   const locationText = board && list ? `${board.name} > ${list.name}` : '';
@@ -66,7 +73,16 @@ const Item = React.memo(({ id, onClose }) => {
       const toListName = toList.name || t(`common.${toList.type}`);
 
       actionTextNode = (
-        <>
+        <Trans
+          i18nKey="common.userMovedCardFromListToList"
+          values={{
+            user: creatorUserName,
+            card: cardName,
+            fromList: fromListName,
+            toList: toListName,
+          }}
+        >
+          <span className={styles.author}>{creatorUserName}</span>
           {' moved '}
           <Link
             to={Paths.CARDS.replace(':id', notification.cardId)}
@@ -76,7 +92,7 @@ const Item = React.memo(({ id, onClose }) => {
             {cardName}
           </Link>
           {` from ${fromListName} to ${toListName}`}
-        </>
+        </Trans>
       );
       break;
     }
@@ -84,14 +100,24 @@ const Item = React.memo(({ id, onClose }) => {
       const commentText = truncate(mentionMarkupToText(notification.data.text));
       actionTextNode = (
         <>
-          {` left a new comment  `}
-          <Link
-            to={Paths.CARDS.replace(':id', notification.cardId)}
-            onClick={onClose}
-            className={styles.cardLink}
+          <Trans
+            i18nKey="common.userLeftNewCommentToCard"
+            values={{
+              user: creatorUserName,
+              comment: commentText,
+              card: cardName,
+            }}
           >
-            {cardName}
-          </Link>
+            <span className={styles.author}>{creatorUserName}</span>
+            {` left a new comment  `}
+            <Link
+              to={Paths.CARDS.replace(':id', notification.cardId)}
+              onClick={onClose}
+              className={styles.cardLink}
+            >
+              {cardName}
+            </Link>
+          </Trans>
           <div className={styles.commentText}>&quot;{commentText}&quot;</div>
         </>
       );
@@ -99,7 +125,14 @@ const Item = React.memo(({ id, onClose }) => {
     }
     case NotificationTypes.ADD_MEMBER_TO_CARD:
       actionTextNode = (
-        <>
+        <Trans
+          i18nKey="common.userAddedYouToCard"
+          values={{
+            user: creatorUserName,
+            card: cardName,
+          }}
+        >
+          <span className={styles.author}>{creatorUserName}</span>
           {` added you to `}
           <Link
             to={Paths.CARDS.replace(':id', notification.cardId)}
@@ -108,14 +141,46 @@ const Item = React.memo(({ id, onClose }) => {
           >
             {cardName}
           </Link>
-        </>
+        </Trans>
       );
       break;
     case NotificationTypes.MENTION_IN_COMMENT: {
       const commentText = truncate(mentionMarkupToText(notification.data.text));
       actionTextNode = (
         <>
-          {` mentioned you in a comment on `}
+          <Trans
+            i18nKey="common.userMentionedYouInCommentOnCard"
+            values={{
+              user: creatorUserName,
+              comment: commentText,
+              card: cardName,
+            }}
+          >
+            <span className={styles.author}>{creatorUserName}</span>
+            {` mentioned you in a comment on `}
+            <Link
+              to={Paths.CARDS.replace(':id', notification.cardId)}
+              onClick={onClose}
+              className={styles.cardLink}
+            >
+              {cardName}
+            </Link>
+          </Trans>
+          <div className={styles.commentText}>&quot;{commentText}&quot;</div>
+        </>
+      );
+      break;
+    }
+    case NotificationTypes.DUE_DATE: {
+      actionTextNode = (
+        <Trans
+          i18nKey="common.dueDateExpiredForCard"
+          values={{
+            card: cardName,
+          }}
+        >
+          <span className={styles.author}>{creatorUserName}</span>
+          {` due date expired for `}
           <Link
             to={Paths.CARDS.replace(':id', notification.cardId)}
             onClick={onClose}
@@ -123,8 +188,7 @@ const Item = React.memo(({ id, onClose }) => {
           >
             {cardName}
           </Link>
-          <div className={styles.commentText}>&quot;{commentText}&quot;</div>
-        </>
+        </Trans>
       );
       break;
     }
@@ -143,13 +207,29 @@ const Item = React.memo(({ id, onClose }) => {
       tabIndex={0}
     >
       <div className={styles.avatarContainer}>
-        <UserAvatar id={notification.creatorUserId} size="large" />
+        {notification.creatorUserId ? (
+          <UserAvatar id={notification.creatorUserId} size="large" />
+        ) : (
+          <div
+            style={{
+              background: '#34495e',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              fontWeight: 'bold',
+            }}
+          >
+            S
+          </div>
+        )}
       </div>
       <div className={styles.content}>
-        <div className={styles.textBody}>
-          <span className={styles.author}>{creatorUserName}</span>
-          {actionTextNode}
-        </div>
+        <div className={styles.textBody}>{actionTextNode}</div>
 
         {locationText && <div className={styles.location}>{locationText}</div>}
 

@@ -128,16 +128,8 @@ const buildBodyByFormat = (board, card, notification, actorUser, t) => {
     case Notification.Types.DUE_DATE:
       return {
         text: t('Card %s is due on %s', card.name, board.name),
-        markdown: t(
-          'Card %s is due on %s',
-          markdownCardLink,
-          escapeMarkdown(board.name),
-        ),
-        html: t(
-          'Card %s is due on %s',
-          htmlCardLink,
-          escapeHtml(board.name),
-        ),
+        markdown: t('Card %s is due on %s', markdownCardLink, escapeMarkdown(board.name)),
+        html: t('Card %s is due on %s', htmlCardLink, escapeHtml(board.name)),
       };
     default:
       return null;
@@ -202,11 +194,7 @@ const buildEmail = (board, card, notification, actorUser, notifiableUser, t) => 
 
       break;
     case Notification.Types.DUE_DATE:
-      html = `<p>${t(
-        'Card %s is due on %s',
-        cardLink,
-        boardLink,
-      )}</p>`;
+      html = `<p>${t('Card %s is due on %s', cardLink, boardLink)}</p>`;
 
       break;
     default:

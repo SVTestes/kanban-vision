@@ -260,5 +260,9 @@ module.exports = {
       collection: 'Action',
       via: 'cardId',
     },
+    recurrences: {
+      collection: 'CardRecurrence',
+      via: 'cardId',
+    },
   },
 };

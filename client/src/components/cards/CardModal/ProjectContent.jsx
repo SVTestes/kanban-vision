@@ -54,6 +54,7 @@ const ProjectContent = React.memo(() => {
   const attachmentIds = useSelector(selectors.selectAttachmentIdsForCurrentCard);
 
   const isJoined = useSelector(selectors.selectIsCurrentUserInCurrentCard);
+  const cardRecurrences = useSelector(selectors.selectCardRecurrencesForCurrentCard);
 
   const list = useSelector((state) => selectListById(state, card.listId));
 
@@ -252,6 +253,13 @@ const ProjectContent = React.memo(() => {
     }
   }, [isJoined, dispatch]);
 
+  const handleDeleteRecurrenceClick = useCallback(
+    (recurrenceId) => {
+      dispatch(entryActions.deleteCardRecurrence(recurrenceId));
+    },
+    [dispatch],
+  );
+
   const handleToggleSubscriptionClick = useCallback(() => {
     dispatch(
       entryActions.updateCurrentCard({
@@ -317,7 +325,8 @@ const ProjectContent = React.memo(() => {
             card.stopwatch ||
             board.alwaysDisplayCardCreator ||
             userIds.length > 0 ||
-            labelIds.length > 0) && (
+            labelIds.length > 0 ||
+            cardRecurrences.length > 0) && (
             <div className={styles.moduleWrapper}>
               {board.alwaysDisplayCardCreator && (
                 <div className={styles.attachments}>
@@ -409,6 +418,38 @@ const ProjectContent = React.memo(() => {
                       </button>
                     </LabelsPopup>
                   )}
+                </div>
+              )}
+              {cardRecurrences.length > 0 && (
+                <div className={styles.attachments}>
+                  <div className={styles.text}>{t('common.repeatCard')}</div>
+                  {cardRecurrences.map((recurrence) => (
+                    <span
+                      key={recurrence.id}
+                      className={classNames(styles.attachment, styles.dueDate)}
+                      title={t('common.delete')}
+                    >
+                      <span>
+                        {t(`common.${recurrence.frequency}`)}{' '}
+                        {recurrence.targetList && recurrence.targetList.name
+                          ? `-> ${recurrence.targetList.name}`
+                          : ''}
+                      </span>
+                      <button
+                        type="button"
+                        className={styles.addAttachment}
+                        onClick={() => handleDeleteRecurrenceClick(recurrence.id)}
+                        style={{
+                          background: 'transparent',
+                          border: 'none',
+                          cursor: 'pointer',
+                          marginLeft: '5px',
+                        }}
+                      >
+                        <Icon name="close" size="small" />
+                      </button>
+                    </span>
+                  ))}
                 </div>
               )}
               {card.dueDate && (

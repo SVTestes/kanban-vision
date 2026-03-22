@@ -171,6 +171,7 @@ module.exports = {
 
     const cardMemberships = await CardMembership.qm.getByCardIds(cardIds);
     const cardLabels = await CardLabel.qm.getByCardIds(cardIds);
+    const cardRecurrences = await CardRecurrence.qm.getByCardIds(cardIds);
 
     const taskLists = await TaskList.qm.getByCardIds(cardIds);
     const taskListIds = sails.helpers.utils.mapRecords(taskLists);
@@ -208,6 +209,7 @@ module.exports = {
         cards,
         cardMemberships,
         cardLabels,
+        cardRecurrences,
         taskLists,
         tasks,
         customFieldGroups,

@@ -15,5 +15,7 @@
   "%s created %s in %s on %s": "%s criou %s em %s em %s",
   "%s left a new comment to %s on %s": "%s deixou um novo comentário em %s em %s",
   "%s mentioned you in %s on %s": "%s mencionou você em %s em %s",
-  "%s moved %s from %s to %s on %s": "%s moveu %s de %s para %s em %s"
+  "%s moved %s from %s to %s on %s": "%s moveu %s de %s para %s em %s",
+  "Due Date Expired": "Data de Vencimento Expirada",
+  "Card %s is due on %s": "O cartão %s estourou o prazo no quadro %s"
 }

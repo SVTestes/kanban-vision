@@ -1,0 +1,50 @@
+      at Timeout._onTimeout (/app/config/bootstrap.js:17:32)
+      at listOnTimeout (node:internal/timers:585:17)
+      at process.processTimers (node:internal/timers:521:7) {
+    code: 'E_INVALID_CRITERIA',
+    details: 'Could not use the provided `where` clause.  Could not filter by `isCompleted`: `isCompleted` is not a recognized attribute for this model (`card`).  And since the model declares `schema: true`, this is not allowed.'
+  },
+  isOperational: true,
+  code: 'E_INVALID_CRITERIA',
+  details: 'Could not use the provided `where` clause.  Could not filter by `isCompleted`: `isCompleted` is not a recognized attribute for this model (`card`).  And since the model declares `schema: true`, this is not allowed.'
+}
+[33m[nodemon] files triggering change check: config/bootstrap.js[39m
+[33m[nodemon] matched rule: **/config/**/*.js[39m
+[33m[nodemon] changes after filters (before/after): 1/1[39m
+[33m[nodemon] delaying restart for 1000ms[39m
+[32m[nodemon] restarting due to changes...[39m
+[33m[nodemon] config/bootstrap.js[39m
+
+[32m[nodemon] starting `node app.js`[39m
+[33m[nodemon] forking[39m
+[33m[nodemon] child pid: 244[39m
+ info: Initializing custom hook (`current-user`)
+ info: Initializing custom hook (`file-manager`)
+ info: Initializing custom hook (`query-methods`)
+ info: Initializing custom hook (`terms`)
+ info: Initializing custom hook (`watcher`)
+error: Ignoring attempt to bind route (`/*`) to unknown view: `index`
+ info: 
+ info:                .-..-.
+ info: 
+ info:    Sails              <|    .-..-.
+ info:    v1.5.15             |\
+ info:                       /|.\
+ info:                      / || \
+ info:                    ,'  |'  \
+ info:                 .-'.-==|/_--'
+ info:                 `--'-------' 
+ info:    __---___--___---___--___---___--___
+ info:  ____---___--___---___--___---___--___-__
+ info: 
+ info: Server lifted in `/app`
+ info: To shut down Sails, press <CTRL> + C at any time.
+ info: Read more at https://sailsjs.com/support.
+
+debug: -------------------------------------------------------
+debug: :: Fri Mar 20 2026 17:07:33 GMT+0000 (Coordinated Universal Time)
+debug: Environment : development
+debug: Port        : 1337
+debug: Local       : http://localhost:1337
+
+debug: -------------------------------------------------------

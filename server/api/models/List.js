@@ -167,5 +167,9 @@ module.exports = {
       collection: 'Card',
       via: 'listId',
     },
+    recurrences: {
+      collection: 'CardRecurrence',
+      via: 'targetListId',
+    },
   },
 };

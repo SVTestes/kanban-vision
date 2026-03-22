@@ -1,0 +1,90 @@
+planka-client-1  | npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+planka-client-1  | npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+planka-client-1  | npm warn deprecated source-map-resolve@0.6.0: See https://github.com/lydell/source-map-resolve#deprecated
+postgres-1       | ********************************************************************************
+postgres-1       | WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+postgres-1       |          anyone with access to the Postgres port to access your database without
+postgres-1       |          a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+postgres-1       |          documentation about "trust":
+postgres-1       |          https://www.postgresql.org/docs/current/auth-trust.html
+postgres-1       |          In Docker's default configuration, this is effectively any other
+postgres-1       |          container on the same system.
+postgres-1       | 
+postgres-1       |          It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+postgres-1       |          it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+postgres-1       |          "docker run".
+postgres-1       | ********************************************************************************
+planka-client-1  | npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+planka-client-1  | npm warn deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+planka-client-1  | npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+planka-client-1  | npm warn deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+planka-client-1  | npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+postgres-1       | The files belonging to this database system will be owned by user "postgres".
+postgres-1       | This user must also own the server process.
+planka-client-1  | npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+planka-client-1  | npm warn deprecated @babel/plugin-proposal-optional-catch-binding@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-catch-binding instead.
+planka-client-1  | npm warn deprecated @babel/plugin-proposal-object-rest-spread@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
+planka-client-1  | npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+postgres-1       | 
+postgres-1       | The database cluster will be initialized with locale "en_US.utf8".
+postgres-1       | The default database encoding has accordingly been set to "UTF8".
+postgres-1       | The default text search configuration will be set to "english".
+postgres-1       | 
+planka-client-1  | npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+planka-client-1  | npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+planka-client-1  | npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+planka-client-1  | npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+planka-client-1  | npm warn deprecated deep-diff@0.3.8: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+postgres-1       | Data page checksums are disabled.
+postgres-1       | 
+postgres-1       | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+postgres-1       | creating subdirectories ... ok
+planka-client-1  | npm warn deprecated react-beautiful-dnd@13.1.1: react-beautiful-dnd is now deprecated. Context and options: https://github.com/atlassian/react-beautiful-dnd/issues/2672
+planka-client-1  | npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+postgres-1       | selecting dynamic shared memory implementation ... posix
+postgres-1       | selecting default max_connections ... 100
+postgres-1       | selecting default shared_buffers ... 128MB
+postgres-1       | selecting default time zone ... UTC
+postgres-1       | creating configuration files ... ok
+postgres-1       | running bootstrap script ... ok
+postgres-1       | sh: locale: not found
+postgres-1       | 2026-03-06 00:10:41.359 UTC [36] WARNING:  no usable system locales were found
+postgres-1       | performing post-bootstrap initialization ... ok
+postgres-1       | initdb: warning: enabling "trust" authentication for local connections
+postgres-1       | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+postgres-1       | syncing data to disk ... ok
+postgres-1       | 
+postgres-1       | 
+postgres-1       | Success. You can now start the database server using:
+postgres-1       | 
+postgres-1       |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+postgres-1       | 
+postgres-1       | waiting for server to start....2026-03-06 00:10:42.480 UTC [42] LOG:  starting PostgreSQL 16.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1       | 2026-03-06 00:10:42.484 UTC [42] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1       | 2026-03-06 00:10:42.491 UTC [45] LOG:  database system was shut down at 2026-03-06 00:10:41 UTC
+postgres-1       | 2026-03-06 00:10:42.497 UTC [42] LOG:  database system is ready to accept connections
+postgres-1       |  done
+postgres-1       | server started
+postgres-1       | CREATE DATABASE
+postgres-1       | 
+postgres-1       | 
+postgres-1       | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+postgres-1       | 
+postgres-1       | waiting for server to shut down....2026-03-06 00:10:42.636 UTC [42] LOG:  received fast shutdown request
+postgres-1       | 2026-03-06 00:10:42.640 UTC [42] LOG:  aborting any active transactions
+postgres-1       | 2026-03-06 00:10:42.642 UTC [42] LOG:  background worker "logical replication launcher" (PID 48) exited with exit code 1
+postgres-1       | 2026-03-06 00:10:42.642 UTC [43] LOG:  shutting down
+postgres-1       | 2026-03-06 00:10:42.644 UTC [43] LOG:  checkpoint starting: shutdown immediate
+postgres-1       | 2026-03-06 00:10:42.879 UTC [43] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.021 s, sync=0.205 s, total=0.238 s; sync files=301, longest=0.006 s, average=0.001 s; distance=4272 kB, estimate=4272 kB; lsn=0/191E8A0, redo lsn=0/191E8A0
+postgres-1       | 2026-03-06 00:10:42.887 UTC [42] LOG:  database system is shut down
+postgres-1       |  done
+postgres-1       | server stopped
+postgres-1       | 
+postgres-1       | PostgreSQL init process complete; ready for start up.
+postgres-1       | 
+postgres-1       | 2026-03-06 00:10:42.959 UTC [1] LOG:  starting PostgreSQL 16.13 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-1       | 2026-03-06 00:10:42.959 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-1       | 2026-03-06 00:10:42.959 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-1       | 2026-03-06 00:10:42.965 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-1       | 2026-03-06 00:10:42.972 UTC [58] LOG:  database system was shut down at 2026-03-06 00:10:42 UTC
+postgres-1       | 2026-03-06 00:10:42.978 UTC [1] LOG:  database system is ready to accept connections

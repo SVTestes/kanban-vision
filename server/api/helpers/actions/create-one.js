@@ -79,16 +79,8 @@ const buildBodyByFormat = (board, card, action, actorUser, t) => {
     case Action.Types.DUE_DATE:
       return {
         text: t('Card %s is due on %s', card.name, board.name),
-        markdown: t(
-          'Card %s is due on %s',
-          markdownCardLink,
-          escapeMarkdown(board.name),
-        ),
-        html: t(
-          'Card %s is due on %s',
-          htmlCardLink,
-          escapeHtml(board.name),
-        ),
+        markdown: t('Card %s is due on %s', markdownCardLink, escapeMarkdown(board.name)),
+        html: t('Card %s is due on %s', htmlCardLink, escapeHtml(board.name)),
       };
     default:
       return null;

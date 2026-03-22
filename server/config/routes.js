@@ -183,6 +183,9 @@ module.exports.routes = {
   'POST /api/cards/:cardId/card-labels': 'card-labels/create',
   'DELETE /api/cards/:cardId/card-labels/labelId::labelId': 'card-labels/delete',
 
+  'POST /api/cards/:cardId/card-recurrences': 'card-recurrences/create',
+  'DELETE /api/card-recurrences/:id': 'card-recurrences/delete',
+
   'POST /api/cards/:cardId/task-lists': 'task-lists/create',
   'GET /api/task-lists/:id': 'task-lists/show',
   'PATCH /api/task-lists/:id': 'task-lists/update',

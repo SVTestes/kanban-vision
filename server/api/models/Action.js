@@ -46,7 +46,7 @@
  *           example: "1357158568008091267"
  *         type:
  *           type: string
- *           enum: [createCard, moveCard, addMemberToCard, removeMemberFromCard, completeTask, uncompleteTask]
+ *           enum: [createCard, moveCard, addMemberToCard, removeMemberFromCard, completeTask, uncompleteTask, dueDate]
  *           description: Type of the action
  *           example: moveCard
  *         data:
@@ -74,10 +74,11 @@ const Types = {
   REMOVE_MEMBER_FROM_CARD: 'removeMemberFromCard',
   COMPLETE_TASK: 'completeTask',
   UNCOMPLETE_TASK: 'uncompleteTask',
+  DUE_DATE: 'dueDate',
 };
 
-const INTERNAL_NOTIFIABLE_TYPES = [Types.MOVE_CARD, Types.ADD_MEMBER_TO_CARD];
-const EXTERNAL_NOTIFIABLE_TYPES = [Types.CREATE_CARD, Types.MOVE_CARD];
+const INTERNAL_NOTIFIABLE_TYPES = [Types.MOVE_CARD, Types.ADD_MEMBER_TO_CARD, Types.DUE_DATE];
+const EXTERNAL_NOTIFIABLE_TYPES = [Types.CREATE_CARD, Types.MOVE_CARD, Types.DUE_DATE];
 const PERSONAL_NOTIFIABLE_TYPES = [Types.ADD_MEMBER_TO_CARD];
 
 module.exports = {
